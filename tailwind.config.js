@@ -21,7 +21,8 @@ module.exports = {
             },
             gridTemplateColumns: {
                 'auto-1': ' repeat(1, minmax(0, auto))',
-               'auto-2': ' repeat(2, minmax(0, auto))',
+               'auto-4': ' repeat(4, minmax(0, auto))',
+               'auto-2': ' repeat(2, minmax(0, auto))'
               },
             boxShadow: {
               btn: "-1px 8px 12px 0px rgba(255,68,69,0.3)",
