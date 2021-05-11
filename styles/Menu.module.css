@@ -1,0 +1,5 @@
+@media (max-width: 360px) {
+  .menu {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

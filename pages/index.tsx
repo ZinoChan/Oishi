@@ -10,7 +10,7 @@ export default function Home() {
     >
       <Navbar />
       <div className="max-w-screen-xl px-2 mx-auto w-full">
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-4 ">
           <div className="self-center md:block hidden">
             <h2 className="text-3xl font-main font-bold mb-4">Wait Less</h2>
             <p className="font-poppins leading-normal text-md text-gray-500">
