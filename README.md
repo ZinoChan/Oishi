@@ -1,3 +1,1 @@
-## Next js projects boilerplate
-
-nextjs / eslint / prettier /typescript / tailwindcss
+## Next js Food Delivery web app
