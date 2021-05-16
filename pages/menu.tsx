@@ -2,9 +2,15 @@ import Cart from "@components/menu/Cart";
 import MenuItem from "@components/menu/MenuItem";
 import Navbar from "@components/Navbar";
 import styles from "@styles/Menu.module.css";
+import Link from "next/link";
 import { useState } from "react";
+import { items_data } from "../data/data";
 
 const Menu = () => {
+  const [current_food, setCurrentFood] = useState("pizza");
+
+  const food = items_data.find((item) => item.type === current_food);
+
   const menuIcons = [
     { name: "pizza", src: "/images/icons/pizza.svg" },
     { name: "burger", src: "/images/icons/burger.svg" },
@@ -24,7 +30,8 @@ const Menu = () => {
           {menuIcons.map((icon, index) => (
             <div
               key={`${icon.name}-${index}`}
-              className="rounded-xl border border-gray-200 text-center w-16 p-1"
+              onClick={() => setCurrentFood(icon.name)}
+              className="rounded-xl border border-gray-200 text-center w-16 p-1 hover:border-primary cursor-pointer"
             >
               <img
                 src={icon.src}
@@ -40,14 +47,20 @@ const Menu = () => {
         <div
           className={`${styles.menu} grid grid-cols-2 md:grid-cols-auto-4 md:gap-8 gap-4   justify-center`}
         >
-          <MenuItem />
-          <MenuItem />
-          <MenuItem />
-          <MenuItem />
-          <MenuItem />
-          <MenuItem />
-          <MenuItem />
-          <MenuItem />
+          {food.items.length === 0 && <p>No Food Was Found</p>}
+
+          {food?.items &&
+            food?.items?.map(({ id, item_name, item_image, price }) => (
+              <Link href={`details/${current_food}/${id}`} key={id}>
+                <a>
+                  <MenuItem
+                    item_name={item_name}
+                    item_img={item_image}
+                    price={price}
+                  />
+                </a>
+              </Link>
+            ))}
         </div>
       </div>
     </section>

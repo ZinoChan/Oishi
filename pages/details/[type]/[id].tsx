@@ -1,7 +1,17 @@
 import Comments from "@components/details/Comments";
 import Navbar from "@components/Navbar";
+import { items_data } from "data/data";
+import { useRouter } from "next/router";
 
 const ItemDetails = () => {
+  const router = useRouter();
+
+  const { type, id } = router.query;
+
+  const item_details = items_data
+    .find((item) => item.type === type)
+    .items.find((item) => item.id === Number(id));
+
   return (
     <section className="min-h-screen flex items-center py-20 bg-light_gray">
       <Navbar />
@@ -9,22 +19,20 @@ const ItemDetails = () => {
         <div className="grid lg:grid-cols-2 lg:grid-rows-2 grid-cols-1  gap-8">
           <div className="self-center">
             <h1 className="font-main text-2xl font-bold capitalize mb-2">
-              Margarita
+              {item_details.item_name}
             </h1>
             <p className="text-md font-poppins text-gray-500 leading-normal mb-4">
-              And a search for 'lorem ipsum' will uncover many web sites still
-              in their infancy. Various versions have evolved over the years,
-              sometimes by accident,
+              {item_details.description}
             </p>
             <h2 className="font-main text-xl font-bold capitalize">
-              Margarita
+              Ingredients
             </h2>
             <p className="text-md font-poppins text-gray-500 leading-normal mb-4">
-              Onion / Mushroum / Tomato / Pepper / cheese / Fish
+              {item_details.ingredients}
             </p>
           </div>
           <div className="xl:row-span-2 self-center justify-self-center">
-            <img src="/images/pizza.png" alt="pizza" />
+            <img src={item_details.item_image} alt="pizza" />
             <div className="flex justify-between items-center mt-6 flex-col sm:flex-row">
               <div className="flex space-x-6">
                 <h2 className="font-main text-xl font-bold capitalize">
@@ -54,7 +62,7 @@ const ItemDetails = () => {
             </div>
             <div className="flex items-center justify-between mt-4 flex-col sm:flex-row">
               <p className="text-md font-main text-xl  text-gray-900 leading-normal ">
-                Price: 30$
+                Price: {item_details.price}$
               </p>
               <button className=" focus:outline-none transition-all hover:shadow-btn_lg shadow-btn  px-4 py-2 font-bold rounded bg-primary text-white font-main uppercase">
                 place order
