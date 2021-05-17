@@ -3,7 +3,7 @@ import React from "react";
 const CreditCard = () => {
   return (
     <form className="my-6 grid sm:grid-cols-3 grid-cols-1 gap-4">
-      <div className="flex flex-col space-y-2 col-span-3">
+      <div className="flex flex-col space-y-2 sm:col-span-3">
         <label htmlFor="cardNumber" className="font-main text-md">
           Card Number
         </label>
