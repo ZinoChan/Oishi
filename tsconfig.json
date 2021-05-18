@@ -18,7 +18,10 @@
     "paths": {
       "@components/*": ["./components/*"],
       "@public/*": ["./public/*"],
-      "@styles/*": ["./styles/*"]
+      "@styles/*": ["./styles/*"],
+      "@sagas/*": ["./sagas/*"],
+      "@slices/*": ["./slices/*"],
+      "@store/*": ["./store/*"]
     }
   },
   "exclude": ["node_modules"],

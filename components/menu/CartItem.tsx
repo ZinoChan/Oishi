@@ -1,10 +1,14 @@
-const CartItem = () => {
+const CartItem = ({ item_name, item_image, price, quantity }) => {
   return (
     <div className="bg-white rounded-lg px-2 py-4 flex justify-between mb-6">
-      <img src="/images/pizza 1.png" className="w-20 h-auto" alt="pizza" />
+      <img src={item_image} className="w-20 h-auto" alt="pizza" />
       <div>
-        <h3 className="font-main capitalize text-xl mb-1">Margarita x 2</h3>
-        <span className="text-poppins font-bold text-md text-red-500">80$</span>
+        <h3 className="font-main capitalize text-xl mb-1">
+          {item_name} x {quantity}
+        </h3>
+        <span className="text-poppins font-bold text-md text-red-500">
+          {price}$
+        </span>
       </div>
       <div className="flex flex-col items-center justify-between">
         <span>icon</span>

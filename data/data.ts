@@ -204,3 +204,25 @@ export const makeNew = [
         ]
     }
 ]
+
+
+export const cart = [
+    {
+        id: 1,
+        item_name: "Margherita",
+        item_image: "/images/pizza 1.png",
+        category: "pizza",
+        quantity: 2,
+        price: 8
+    },
+    {
+        id: 2,
+        item_name: "King Burger",
+        item_image: "/images/pizza 1.png",
+        category: "burger",
+        quantity: 1,
+        price: 8
+    },
+   
+
+]

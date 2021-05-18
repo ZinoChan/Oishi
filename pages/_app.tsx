@@ -2,6 +2,7 @@ import "tailwindcss/tailwind.css";
 import "@fontsource/pacifico";
 import "@fontsource/poppins";
 import "@fontsource/quicksand/700.css";
+import { wrapper } from "store";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,4 +12,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

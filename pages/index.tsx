@@ -1,6 +1,7 @@
 import styles from "@styles/Home.module.css";
 import Link from "next/link";
 import Navbar from "@components/Navbar";
+
 export default function Home() {
   return (
     <section
@@ -24,6 +25,7 @@ export default function Home() {
             >
               Tasty
             </h1>
+
             <button className=" focus:outline-none transition-all hover:shadow-btn_lg shadow-btn mt-4 px-4 py-2 font-bold rounded bg-primary text-white font-main uppercase">
               <Link href="/menu">
                 <a>order now</a>

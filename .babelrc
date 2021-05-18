@@ -8,7 +8,11 @@
           "alias": {
             "@components": "./components",
             "@styles": "./styles",
-            "@public": "./public"
+            "@public": "./public",
+            "@slices": "./slices",
+            "@sagas": "./sagas",
+            "@store": "./store"
+
           }
         }
       ]

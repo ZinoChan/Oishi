@@ -1,3 +1,4 @@
+import { cart } from "data/data";
 import React from "react";
 import CartItem from "./CartItem";
 import Total from "./Total";
@@ -18,8 +19,15 @@ const Cart = ({ openCart, setOpenCart }) => {
         </span>
       </div>
       <h2 className="font-main text-2xl capitalize mb-6">Cart Items</h2>
-      <CartItem />
-      <CartItem />
+      {cart.map(({ item_name, item_image, price, quantity, id }) => (
+        <CartItem
+          item_name={item_name}
+          item_image={item_image}
+          price={price}
+          quantity={quantity}
+          key={id}
+        />
+      ))}
       <Total />
     </div>
   );
