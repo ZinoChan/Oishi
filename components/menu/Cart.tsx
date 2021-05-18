@@ -1,9 +1,12 @@
-import { cart } from "data/data";
 import React from "react";
+import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import Total from "./Total";
+import Image from "next/image";
 
 const Cart = ({ openCart, setOpenCart }) => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <div
       className={`${
@@ -18,17 +21,32 @@ const Cart = ({ openCart, setOpenCart }) => {
           X
         </span>
       </div>
-      <h2 className="font-main text-2xl capitalize mb-6">Cart Items</h2>
-      {cart.map(({ item_name, item_image, price, quantity, id }) => (
-        <CartItem
-          item_name={item_name}
-          item_image={item_image}
-          price={price}
-          quantity={quantity}
-          key={id}
-        />
-      ))}
-      <Total />
+      {cart.length > 0 && (
+        <>
+          <h2 className="font-main text-2xl capitalize mb-6">Cart Items</h2>
+          {cart.map(({ item_name, item_image, price, quantity, id }) => (
+            <CartItem
+              id={id}
+              item_name={item_name}
+              item_image={item_image}
+              price={price}
+              quantity={quantity}
+              key={id}
+            />
+          ))}
+          <Total />
+        </>
+      )}
+      {cart.length === 0 && (
+        <>
+          <h2 className="font-main text-2xl capitalize mb-6">
+            Your Cart is Empty
+          </h2>
+          <div className="absolute top-1/2 transform -translate-y-1/2">
+            <Image src="/images/empty cart.png" width={300} height={300} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

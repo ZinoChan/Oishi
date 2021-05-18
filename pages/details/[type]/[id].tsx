@@ -1,7 +1,9 @@
 import Comments from "@components/details/Comments";
 import Navbar from "@components/Navbar";
+import { addItem } from "@slices/cartSlice";
 import { items_data } from "data/data";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const ItemDetails = () => {
   const router = useRouter();
@@ -11,6 +13,8 @@ const ItemDetails = () => {
   const item_details = items_data
     .find((item) => item.type === type)
     .items.find((item) => item.id === Number(id));
+
+  const dispatch = useDispatch();
 
   return (
     <section className="min-h-screen flex items-center py-20 bg-light_gray">
@@ -64,7 +68,10 @@ const ItemDetails = () => {
               <p className="text-md font-main text-xl  text-gray-900 leading-normal ">
                 Price: {item_details.price}$
               </p>
-              <button className=" focus:outline-none transition-all hover:shadow-btn_lg shadow-btn  px-4 py-2 font-bold rounded bg-primary text-white font-main uppercase">
+              <button
+                onClick={() => dispatch(addItem(item_details))}
+                className=" focus:outline-none transition-all hover:shadow-btn_lg shadow-btn  px-4 py-2 font-bold rounded bg-primary text-white font-main uppercase"
+              >
                 place order
               </button>
             </div>

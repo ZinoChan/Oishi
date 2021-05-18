@@ -1,4 +1,9 @@
-const CartItem = ({ item_name, item_image, price, quantity }) => {
+import { addQty, minusQty, removeItem } from "@slices/cartSlice";
+import { useDispatch } from "react-redux";
+
+const CartItem = ({ id, item_name, item_image, price, quantity }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="bg-white rounded-lg px-2 py-4 flex justify-between mb-6">
       <img src={item_image} className="w-20 h-auto" alt="pizza" />
@@ -10,15 +15,23 @@ const CartItem = ({ item_name, item_image, price, quantity }) => {
           {price}$
         </span>
       </div>
-      <div className="flex flex-col items-center justify-between">
-        <span>icon</span>
+      <div className="flex flex-col items-end justify-between">
+        <button onClick={() => dispatch(removeItem(id))}>
+          <img src="/images/icons/trash.svg" className="w-5 h-auto" />
+        </button>
         <div className="flex space-x-2">
-          <span className="rounded-full w-6 h-6 flex items-center bg-primary text-white justify-center text-md font-poppins font-bold">
-            +
-          </span>
-          <span className="rounded-full w-6 h-6 flex items-center bg-primary text-white  justify-center text-md font-poppins font-bold">
+          <button
+            onClick={() => dispatch(minusQty(id))}
+            className="rounded-full w-6 h-6 flex items-center bg-primary text-white justify-center text-md font-poppins font-bold"
+          >
             -
-          </span>
+          </button>
+          <button
+            onClick={() => dispatch(addQty(id))}
+            className="rounded-full w-6 h-6 flex items-center bg-primary text-white  justify-center text-md font-poppins font-bold"
+          >
+            +
+          </button>
         </div>
       </div>
     </div>
