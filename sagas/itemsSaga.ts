@@ -3,7 +3,7 @@ import { getItemsError, getItemsLoading } from 'slices/appSlice';
 import { getItemsSuccess } from 'slices/itemsSlice';
 
 const fetchItems = async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos/');
+    const response = await fetch('http://localhost:3004/data');
     const items = await response.json()
     return items
 }

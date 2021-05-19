@@ -1,15 +1,29 @@
 import Cart from "@components/menu/Cart";
 import MenuItem from "@components/menu/MenuItem";
 import Navbar from "@components/Navbar";
+import { END } from "@redux-saga/core";
+import { getItems } from "@slices/itemsSlice";
+import { SagaStore, wrapper } from "@store/index";
 import styles from "@styles/Menu.module.css";
 import Link from "next/link";
 import { useState } from "react";
-import { items_data } from "../data/data";
+import { useSelector } from "react-redux";
+
+export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
+  if (store.getState().items.length === 0) {
+    store.dispatch(getItems());
+    store.dispatch(END);
+  }
+
+  await (store as SagaStore).sagaTask.toPromise();
+});
 
 const Menu = () => {
   const [current_food, setCurrentFood] = useState("pizza");
 
-  const food = items_data.find((item) => item.type === current_food);
+  const items = useSelector((state: { items: any }) => state.items);
+
+  const food = items?.find((item) => item.type === current_food);
 
   const menuIcons = [
     { name: "pizza", src: "/images/icons/pizza.svg" },
@@ -47,11 +61,11 @@ const Menu = () => {
         <div
           className={`${styles.menu} grid grid-cols-2 md:grid-cols-auto-4 md:gap-8 gap-4   justify-center`}
         >
-          {food.items.length === 0 && <p>No Food Was Found</p>}
+          {food?.items.length === 0 && <p>No Food Was Found</p>}
 
           {food?.items &&
             food?.items?.map(({ id, item_name, item_image, price }) => (
-              <Link href={`details/${current_food}/${id}`} key={id}>
+              <Link href={`/details/${current_food}/${id}`} key={id}>
                 <a>
                   <MenuItem
                     item_name={item_name}

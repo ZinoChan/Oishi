@@ -1,24 +1,35 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, createAction} from '@reduxjs/toolkit'
 import logger from 'redux-logger'
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware, { Task } from 'redux-saga';
 import rootSaga from '@sagas/rootSaga';
-import { createWrapper } from 'next-redux-wrapper';
+import { Context, createWrapper, HYDRATE } from 'next-redux-wrapper';
 import itemsSlice from '@slices/itemsSlice';
 import appSlice from '@slices/appSlice';
 import cartSlice from '@slices/cartSlice';
+import {Store} from 'redux'
+export interface SagaStore extends Store {
+    sagaTask?: Task
+}
 
-const sagaMiddleware = createSagaMiddleware();
 
-const store = configureStore({
-    reducer: {
-        app: appSlice,
-        items: itemsSlice,
-        cart: cartSlice 
-    },
-    middleware: (getDefaultMiddleware) => 
-        getDefaultMiddleware({thunk: false}).concat(logger, sagaMiddleware)
-})
+export const makeStore = (context: Context) => {
+    const sagaMiddleware = createSagaMiddleware();
+    const store = configureStore({
+        reducer: {
+            app: appSlice,
+            items: itemsSlice,
+            cart: cartSlice,
+        },
+        middleware: (getDefaultMiddleware) => 
+            getDefaultMiddleware({thunk: false}).concat(logger, sagaMiddleware)
+    });
 
-sagaMiddleware.run(rootSaga);
+    (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
 
-export const wrapper = createWrapper(() => store)
+    return store;
+
+}
+
+
+
+export const wrapper = createWrapper(makeStore);
