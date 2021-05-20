@@ -1,8 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface CartItem {
+        id: number;
+        item_name: string;
+        item_image: string;
+        price: number;
+        category: string;
+        quantity: number;
+}
+
+const initialState : CartItem[] = []
+
 const cartSlice = createSlice({
     name: 'cart',
-    initialState: [],
+    initialState,
     reducers: {
         addItem: (state, action) => {
             return  state.some(item => item.id === action.payload.id) ? 

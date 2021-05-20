@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
-import Total from "./Total";
+import CartTotal from "./CartTotal";
 import Image from "next/image";
 
 const Cart = ({ openCart, setOpenCart }) => {
@@ -34,7 +34,7 @@ const Cart = ({ openCart, setOpenCart }) => {
               key={id}
             />
           ))}
-          <Total />
+          <CartTotal cart={cart} />
         </>
       )}
       {cart.length === 0 && (

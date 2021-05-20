@@ -5,14 +5,14 @@ const CartItem = ({ id, item_name, item_image, price, quantity }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="bg-white rounded-lg px-2 py-4 flex justify-between mb-6">
+    <div className="bg-white rounded-lg px-2 py-4 flex justify-between  space-x-4 mb-6">
       <img src={item_image} className="w-20 h-auto" alt="pizza" />
       <div>
-        <h3 className="font-main capitalize text-xl mb-1">
+        <h3 className="font-main  text-xl mb-1">
           {item_name} x {quantity}
         </h3>
         <span className="text-poppins font-bold text-md text-red-500">
-          {price}$
+          {(price * quantity).toFixed(2)}$
         </span>
       </div>
       <div className="flex flex-col items-end justify-between">

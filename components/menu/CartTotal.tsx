@@ -1,11 +1,23 @@
-const Total = () => {
+const CartTotal = ({ cart }) => {
+  const subTotal = () => {
+    if (cart.length !== 0) {
+      return cart
+        .reduce((sum, i) => {
+          return sum + i.price * i.quantity;
+        }, 0)
+        .toFixed(2);
+    }
+  };
+
+  const total = Number(subTotal()) + 5;
+
   return (
     <div className="bg-white rounded-lg px-2 py-4 grid grid-cols-2 gap-2 ">
       <span className="text-poppins font-bold text-md text-gray-800">
         Subtotal :
       </span>
       <span className="text-poppins font-bold text-md text-gray-800 justify-self-end">
-        80$
+        {subTotal()}$
       </span>
       <span className="text-poppins font-bold text-md text-gray-800">
         Shipping :
@@ -17,7 +29,7 @@ const Total = () => {
         Total :
       </span>
       <span className="text-poppins font-bold text-md text-gray-800 justify-self-end">
-        85$
+        {total}$
       </span>
       <button className="bg-primary  px-4 col-span-2 py-2 text-white font-main font-bold">
         Process To Checkout
@@ -26,4 +38,4 @@ const Total = () => {
   );
 };
 
-export default Total;
+export default CartTotal;

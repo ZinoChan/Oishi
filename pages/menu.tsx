@@ -7,7 +7,7 @@ import { SagaStore, wrapper } from "@store/index";
 import styles from "@styles/Menu.module.css";
 import Link from "next/link";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
   if (store.getState().items.length === 0) {
@@ -21,7 +21,10 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
 const Menu = () => {
   const [current_food, setCurrentFood] = useState("pizza");
 
-  const items = useSelector((state: { items: any }) => state.items);
+  const { items, cart } = useSelector((state: { items: any; cart: any }) => ({
+    items: state.items,
+    cart: state.cart,
+  }));
 
   const food = items?.find((item) => item.type === current_food);
 
@@ -65,15 +68,15 @@ const Menu = () => {
 
           {food?.items &&
             food?.items?.map(({ id, item_name, item_image, price }) => (
-              <Link href={`/details/${current_food}/${id}`} key={id}>
-                <a>
-                  <MenuItem
-                    item_name={item_name}
-                    item_img={item_image}
-                    price={price}
-                  />
-                </a>
-              </Link>
+              <MenuItem
+                key={id}
+                cart={cart}
+                category={current_food}
+                id={id}
+                item_name={item_name}
+                item_image={item_image}
+                price={price}
+              />
             ))}
         </div>
       </div>
