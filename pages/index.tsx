@@ -1,8 +1,19 @@
 import styles from "@styles/Home.module.css";
 import Link from "next/link";
 import Navbar from "@components/Navbar";
+import { useDispatch } from "react-redux";
+import { signInWithGoogle, onAuthSuccess, signOut } from "@slices/authSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@lib/firebase";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const [user, loading, error] = useAuthState(auth);
+
+  if (user) {
+    dispatch(onAuthSuccess(user));
+  }
+
   return (
     <section
       style={{ backgroundImage: "url(/images/home-bg.jpg)" }}
@@ -25,7 +36,8 @@ export default function Home() {
             >
               Tasty
             </h1>
-
+            <button onClick={() => dispatch(signInWithGoogle())}>click</button>
+            <button onClick={() => dispatch(signOut())}>out</button>
             <button className=" focus:outline-none transition-all hover:shadow-btn_lg shadow-btn mt-4 px-4 py-2 font-bold rounded bg-primary text-white font-main uppercase">
               <Link href="/menu">
                 <a>order now</a>

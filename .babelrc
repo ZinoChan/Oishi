@@ -11,7 +11,8 @@
             "@public": "./public",
             "@slices": "./slices",
             "@sagas": "./sagas",
-            "@store": "./store"
+            "@store": "./store",
+            "@lib": "./lib"
 
           }
         }

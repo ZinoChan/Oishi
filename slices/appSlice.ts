@@ -20,7 +20,9 @@ const appSlice = createSlice({
         },
         getItemsError: (state, action: PayloadAction<boolean>) => {
             return {...state, getItemsError: action.payload}
-        }
+        },
+       
+
     }
 })
 

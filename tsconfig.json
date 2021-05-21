@@ -21,7 +21,8 @@
       "@styles/*": ["./styles/*"],
       "@sagas/*": ["./sagas/*"],
       "@slices/*": ["./slices/*"],
-      "@store/*": ["./store/*"]
+      "@store/*": ["./store/*"],
+      "@lib/*": ["./lib/*"]
     }
   },
   "exclude": ["node_modules"],

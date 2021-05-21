@@ -8,6 +8,7 @@ import appSlice from '@slices/appSlice';
 import cartSlice from '@slices/cartSlice';
 import {Store} from 'redux'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import authSlice, { onAuthSuccess } from '@slices/authSlice';
 export interface SagaStore extends Store {
     sagaTask?: Task
 }
@@ -20,9 +21,12 @@ export const makeStore = (context: Context) => {
             app: appSlice,
             items: itemsSlice,
             cart: cartSlice,
+            auth: authSlice,
         },
         middleware: (getDefaultMiddleware) => 
-            getDefaultMiddleware({thunk: false}).concat(logger, sagaMiddleware)
+            getDefaultMiddleware({thunk: false, serializableCheck: {
+                ignoredActions: [onAuthSuccess.type]
+            }}).concat(logger, sagaMiddleware)
     });
 
     (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
