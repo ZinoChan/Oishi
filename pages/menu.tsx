@@ -5,9 +5,9 @@ import { END } from "@redux-saga/core";
 import { getItems } from "@slices/itemsSlice";
 import { SagaStore, wrapper } from "@store/index";
 import styles from "@styles/Menu.module.css";
-import Link from "next/link";
+
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
   if (store.getState().items.length === 0) {

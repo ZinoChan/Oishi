@@ -1,4 +1,4 @@
-import { createAction, createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
 const hydrate = createAction(HYDRATE);
@@ -27,7 +27,7 @@ const itemsSlice = createSlice({
     reducers: {
         getItems () {},
         
-        getItemsSuccess: (state, action) => {
+        getItemsSuccess: (state, action: PayloadAction<ItemsState[]>) => {
             return [...action.payload]
         },
     },
