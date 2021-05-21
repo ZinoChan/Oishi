@@ -5,18 +5,13 @@ import 'firebase/firestore';
 
 
 const  firebaseConfig = {
-//     apiKey: process.env.FIREBASE_API_KEY,
-//   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-//   projectId: process.env.FIREBASE_PROJECT_ID,
-//   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-//   messagingSenderId: process.env.FIREBASE_MSG_SENDER_ID,
-//   appId: process.env.FIREBASE_APP_ID
-apiKey: "AIzaSyA8ZwvjUxDwi8C79qi1qXLcTNSQoDI1-7A",
-authDomain: "oishi-d0b12.firebaseapp.com",
-projectId: "oishi-d0b12",
-storageBucket: "oishi-d0b12.appspot.com",
-messagingSenderId: "830555753120",
-appId: "1:830555753120:web:5997fee9e74b931b0bd7c5"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MSG_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID
+
 };
 
   

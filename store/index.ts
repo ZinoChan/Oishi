@@ -9,6 +9,7 @@ import cartSlice from '@slices/cartSlice';
 import {Store} from 'redux'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import authSlice, { onAuthSuccess } from '@slices/authSlice';
+import profileSlice from '@slices/profileSlice';
 export interface SagaStore extends Store {
     sagaTask?: Task
 }
@@ -22,6 +23,7 @@ export const makeStore = (context: Context) => {
             items: itemsSlice,
             cart: cartSlice,
             auth: authSlice,
+            profile: profileSlice
         },
         middleware: (getDefaultMiddleware) => 
             getDefaultMiddleware({thunk: false, serializableCheck: {
