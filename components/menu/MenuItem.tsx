@@ -1,6 +1,7 @@
 import { addItem } from "@slices/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 const MenuItem = ({ cart, id, category, item_image, price, item_name }) => {
@@ -19,6 +20,8 @@ const MenuItem = ({ cart, id, category, item_image, price, item_name }) => {
     };
 
     dispatch(addItem(order));
+
+    toast.success("order added to basket");
   };
 
   return (
@@ -46,7 +49,7 @@ const MenuItem = ({ cart, id, category, item_image, price, item_name }) => {
           onClick={placeOrder}
           className="disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none flex items-center justify-center font-bold text-white w-6 h-6 rounded-full bg-primary"
         >
-          +
+          <span>+</span>
         </button>
       </div>
     </div>

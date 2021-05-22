@@ -1,17 +1,16 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
 import Register from "pages/register";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
-const WithAuth = ({ children, current_route }) => {
+const WithAuth = ({ children }) => {
   const userExists = useSelector((state: { auth: any }) => !!state.auth?.id);
-  const router = useRouter();
 
-  //   useEffect(() => {
-  //     if (!userExists) {
-  //       router.replace(current_route, "/register", { shallow: true });
-  //     }
-  //   }, [userExists]);
+  useEffect(() => {
+    if (!userExists) {
+      toast.error("You need to Login To checkout");
+    }
+  }, [userExists]);
 
   return <>{userExists ? children : <Register />}</>;
 };

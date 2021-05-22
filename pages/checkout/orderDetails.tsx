@@ -2,12 +2,13 @@ import Navigation from "@components/checkout/Navigation";
 import CartItem from "@components/menu/CartItem";
 import React from "react";
 import { useSelector } from "react-redux";
+import WithAuth from "@components/WithAuth";
 
 const OrderDetails = () => {
   const cart = useSelector((state: { cart: any }) => state.cart);
 
   return (
-    <>
+    <WithAuth>
       <Navigation />
       <section className="min-h-screen sm:py-0 py-20 flex items-center">
         <div className="max-w-2xl px-2 w-full mx-auto">
@@ -33,7 +34,7 @@ const OrderDetails = () => {
           </div>
         </div>
       </section>
-    </>
+    </WithAuth>
   );
 };
 

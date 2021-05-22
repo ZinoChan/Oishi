@@ -1,6 +1,7 @@
 import CreditCard from "@components/checkout/CreditCard";
 import Navigation from "@components/checkout/Navigation";
 import Paypal from "@components/checkout/Paypal";
+import WithAuth from "@components/WithAuth";
 import React, { useState } from "react";
 
 const Payment = () => {
@@ -13,7 +14,7 @@ const Payment = () => {
   ];
 
   return (
-    <>
+    <WithAuth>
       <Navigation />
       <section className="min-h-screen sm:py-0 py-20 flex items-center">
         <div className="max-w-screen-md px-2 w-full mx-auto">
@@ -57,7 +58,7 @@ const Payment = () => {
           </div>
         </div>
       </section>
-    </>
+    </WithAuth>
   );
 };
 

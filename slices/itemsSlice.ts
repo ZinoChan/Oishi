@@ -11,10 +11,9 @@ interface Items {
     description: string;
     ingredients: string;
     price: number;
-    comments: string[]
 }
 export interface ItemsState {
-    id: number;
+    id: string;
     type: string;
     items: Items[]
 }
