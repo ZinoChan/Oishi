@@ -1,8 +1,16 @@
+import { signInWithGoogle, signOut } from "@slices/authSlice";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = ({ setOpenCart = null }) => {
-  const cartLength = useSelector((state: { cart: any }) => state.cart.length);
+  const { cartLength, userExists } = useSelector(
+    (state: { cart: any; auth: any }) => ({
+      cartLength: state.cart.length,
+      userExists: !!state.auth?.id,
+    })
+  );
+
+  const dispatch = useDispatch();
 
   return (
     <header className="absolute top-0 w-full py-4">
@@ -37,9 +45,22 @@ const Navbar = ({ setOpenCart = null }) => {
               </span>
             </button>
           )}
-          <button className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase">
-            Log in
-          </button>
+          {userExists && (
+            <button
+              onClick={() => dispatch(signOut())}
+              className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase"
+            >
+              Profile
+            </button>
+          )}
+          {!userExists && (
+            <button
+              onClick={() => dispatch(signInWithGoogle())}
+              className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase"
+            >
+              Log in
+            </button>
+          )}
         </ul>
       </nav>
     </header>

@@ -1,8 +1,12 @@
 import Navbar from "@components/Navbar";
+import { signInWithGoogle } from "@slices/authSlice";
 
 import React from "react";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
+  const dispatch = useDispatch();
+
   return (
     <section
       style={{ backgroundImage: "url(/images/home-bg.jpg)" }}
@@ -35,6 +39,7 @@ const Register = () => {
           </button>
         </form>
         <button
+          onClick={() => dispatch(signInWithGoogle())}
           type="submit"
           className="font-main text-white bg-blue-300 w-full py-2 rounded mb-4"
         >

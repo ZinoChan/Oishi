@@ -1,9 +1,10 @@
 import Navigation from "@components/checkout/Navigation";
+import WithAuth from "@components/WithAuth";
 import React from "react";
 
 const Billing = () => {
   return (
-    <>
+    <WithAuth current_route="/checkout/billing">
       <Navigation />
       <section className="min-h-screen py-20 flex items-center">
         <div className="max-w-screen-md px-2 w-full mx-auto">
@@ -76,7 +77,7 @@ const Billing = () => {
           </div>
         </div>
       </section>
-    </>
+    </WithAuth>
   );
 };
 

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const CartTotal = ({ cart }) => {
   const subTotal = () => {
     if (cart.length !== 0) {
@@ -31,9 +33,13 @@ const CartTotal = ({ cart }) => {
       <span className="text-poppins font-bold text-md text-gray-800 justify-self-end">
         {total}$
       </span>
-      <button className="bg-primary  px-4 col-span-2 py-2 text-white font-main font-bold">
-        Process To Checkout
-      </button>
+      <Link href="/checkout/billing">
+        <a>
+          <button className="bg-primary  px-4 col-span-2 py-2 text-white font-main font-bold">
+            Process To Checkout
+          </button>
+        </a>
+      </Link>
     </div>
   );
 };

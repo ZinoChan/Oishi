@@ -33,7 +33,7 @@ const itemsSlice = createSlice({
     },
     extraReducers(builder) {
         builder.addCase(hydrate, (state, action) => {
-            console.log('HYDRATE', state, action.payload);
+           
             return [
                 ...state,
                 ...(action.payload as any)[itemsSlice.name],

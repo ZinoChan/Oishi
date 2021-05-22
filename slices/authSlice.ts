@@ -1,9 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
+interface AuthState {
+    id: string;
+    role: string;
+}
+
+const initialState : AuthState | {} = {}
+
 const authSlice = createSlice({
     name: 'auth',
-    initialState: null,
+    initialState,
     reducers: {
         signInWithGoogle () {},
 
@@ -16,7 +23,7 @@ const authSlice = createSlice({
         },
 
         signOutSuccess: (state, action) => {
-            return null
+            return action.payload
         },
 
         onAuthSuccess: (state, action) => {},

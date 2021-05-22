@@ -1,5 +1,5 @@
 import { firebaseAddUser, firebaseGetUser, firebaseSignInWithGoogle, firebaseSignOut } from '@lib/firebase';
-import { onAuthSuccess, signInSuccess, signInWithGoogle, signOut } from '@slices/authSlice';
+import { onAuthSuccess, signInSuccess, signInWithGoogle, signOut, signOutSuccess } from '@slices/authSlice';
 import { setProfile } from '@slices/profileSlice';
 import { call, put } from 'redux-saga/effects'
 
@@ -19,7 +19,11 @@ function* authSaga({type, payload}) {
 
             if(snapshot.data()){
                 const user = snapshot.data();
-                yield put(setProfile(user))
+                yield put(setProfile(user));
+                yield put(signInSuccess({
+                    id: payload.uid,
+                    role: 'USER'
+                }))
             }else if(payload.providerData[0].providerId !== 'password' && !snapshot.data()){
                 const user = {
                     fullname: payload.displayName ? payload.displayName : 'User',
@@ -46,6 +50,7 @@ function* authSaga({type, payload}) {
             case signOut.type:
                 try {
                     yield call(firebaseSignOut)
+                    yield put(signOutSuccess(null))
                 } catch (err) {
                     console.log(err.message)
                 }
