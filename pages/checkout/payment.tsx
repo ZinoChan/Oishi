@@ -47,15 +47,6 @@ const Payment = () => {
               </p>
             </div>
           )}
-
-          <div className="flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
-            <button className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
-              back to billing
-            </button>
-            <button className="font-main text-white bg-primary mb-4 border-2 border-primary  px-4 py-1 rounded ">
-              Confirm
-            </button>
-          </div>
         </div>
       </section>
     </WithAuth>

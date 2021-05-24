@@ -2,15 +2,18 @@ import Navigation from "@components/checkout/Navigation";
 import WithAuth from "@components/WithAuth";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { billingValidation } from "helpers/yupValidation";
 
 const Billing = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(billingValidation),
+  });
 
   const onSubmit = (data) => console.log(data);
 
@@ -31,25 +34,15 @@ const Billing = () => {
                 Full Name
               </label>
               <input
-                {...register("name", {
-                  required: { value: true, message: "this field is required" },
-                })}
+                {...register("fullname")}
                 type="text"
                 className="border border-gray-200 rounded p-2"
               />
               <span className="text-red-300 text-sm font-main">
-                {errors?.name?.message}
+                {errors?.fullname?.message}
               </span>
             </div>
-            <div className="flex flex-col space-y-2">
-              <label htmlFor="Country" className="font-main text-md">
-                Country
-              </label>
-              <input
-                type="text"
-                className="border border-gray-200 rounded p-2"
-              />
-            </div>
+
             <div className="flex flex-col space-y-2">
               <label htmlFor="Adress" className="font-main text-md">
                 Address
@@ -57,42 +50,24 @@ const Billing = () => {
               <input
                 type="text"
                 className="border border-gray-200 rounded p-2"
-                {...register("address", {
-                  required: { value: true, message: "this field is required" },
-                })}
+                {...register("address")}
               />
               <span className="text-red-300 text-sm font-main">
                 {errors?.address?.message}
               </span>
             </div>
-            <div className="flex flex-col space-y-2">
-              <label htmlFor="City" className="font-main text-md">
-                City
-              </label>
-              <input
-                type="text"
-                {...register("city", {
-                  required: { value: true, message: "this field is required" },
-                })}
-                className="border border-gray-200 rounded p-2"
-              />
-              <span className="text-red-300 text-sm font-main">
-                {errors?.city?.message}
-              </span>
-            </div>
+
             <div className="flex flex-col space-y-2">
               <label htmlFor="Zip Code" className="font-main text-md">
-                Zip Code
+                postal code
               </label>
               <input
-                {...register("zipCode", {
-                  required: { value: true, message: "this field is required" },
-                })}
+                {...register("postalCode")}
                 type="text"
                 className="border border-gray-200 rounded p-2"
               />
               <span className="text-red-300 text-sm font-main">
-                {errors?.zipCode?.message}
+                {errors?.postalCode?.message}
               </span>
             </div>
             <div className="flex flex-col space-y-2">
@@ -101,24 +76,27 @@ const Billing = () => {
               </label>
               <input
                 type="text"
-                {...register("phone", {
-                  required: { value: true, message: "this field is required" },
-                })}
+                {...register("phone")}
                 className="border border-gray-200 rounded p-2"
               />
+
               <span className="text-red-300 text-sm font-main">
                 {errors?.phone?.message}
               </span>
             </div>
+
+            <div className=" col-span-2 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
+              <button className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
+                back to details
+              </button>
+              <button
+                type="submit"
+                className="font-main text-white bg-primary mb-4 border-2 border-primary  px-4 py-1 rounded "
+              >
+                Payment details
+              </button>
+            </div>
           </form>
-          <div className="flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
-            <button className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
-              back to details
-            </button>
-            <button className="font-main text-white bg-primary mb-4 border-2 border-primary  px-4 py-1 rounded ">
-              Payment details
-            </button>
-          </div>
         </div>
       </section>
     </WithAuth>
