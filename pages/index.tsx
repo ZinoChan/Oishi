@@ -3,6 +3,8 @@ import Link from "next/link";
 import Navbar from "@components/Navbar";
 
 export default function Home() {
+  console.log(process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
+
   return (
     <section
       style={{ backgroundImage: "url(/images/home-bg.jpg)" }}
