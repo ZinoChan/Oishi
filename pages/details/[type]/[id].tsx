@@ -1,4 +1,4 @@
-import Comments from "@components/details/Comments";
+import Reviews from "@components/details/Reviews";
 import Navbar from "@components/Navbar";
 import Image from "next/image";
 import { addItem } from "@slices/cartSlice";
@@ -13,10 +13,13 @@ const ItemDetails = () => {
 
   const { type, id } = router.query;
 
-  const { items, cart } = useSelector((state: { items: any; cart: any }) => ({
-    items: state.items,
-    cart: state.cart,
-  }));
+  const { items, cart, auth } = useSelector(
+    (state: { items: any; cart: any; auth: any }) => ({
+      items: state.items,
+      cart: state.cart,
+      auth: state.auth && !!state.auth.id,
+    })
+  );
 
   const item_details = items
     ?.find((item) => item.type === type)
@@ -72,33 +75,7 @@ const ItemDetails = () => {
                   width={400}
                   height={400}
                 />
-                <div className="flex justify-between items-center mt-6 flex-col sm:flex-row">
-                  {/* <div className="flex space-x-6">
-                <h2 className="font-main text-xl font-bold capitalize">
-                  Size :
-                </h2>
-                {["M", "L", "XL"].map((size, index) => (
-                  <button
-                    key={`${size}-${index}`}
-                    className="w-8 h-8 bg-secondary font-main font-bold text-md rounded-lg mr-2"
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-              <div className="flex space-x-2 items-center">
-                <h2 className="font-main text-xl font-bold capitalize mb-2">
-                  Quantity :
-                </h2>
-                <button className="w-8 h-8 bg-secondary font-main font-bold text-md rounded-lg">
-                  +
-                </button>
-                <p>1</p>
-                <button className="w-8 h-8 bg-secondary font-main font-bold text-md rounded-lg">
-                  -
-                </button>
-              </div> */}
-                </div>
+                <div className="flex justify-between items-center mt-6 flex-col sm:flex-row"></div>
                 <div className="flex items-center justify-between mt-4 flex-col sm:flex-row">
                   <p className="text-md font-main text-xl  text-gray-900 leading-normal ">
                     Price: {item_details.price}$
@@ -113,7 +90,7 @@ const ItemDetails = () => {
                 </div>
               </div>
               <div className="xl:col-span-1 lg:col-span-2">
-                <Comments />
+                <Reviews auth={auth} />
               </div>
             </div>
           </div>

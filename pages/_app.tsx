@@ -9,6 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@lib/firebase";
 import { useDispatch } from "react-redux";
 import { Toaster } from "react-hot-toast";
+import Loader from "@components/Loader";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);
@@ -23,8 +24,14 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Component {...pageProps} />
-      <Toaster />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Component {...pageProps} />
+          <Toaster />
+        </>
+      )}
     </>
   );
 }
