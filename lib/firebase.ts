@@ -41,6 +41,13 @@ const firebaseGetUser = (id) => firestore.collection('users').doc(id).get();
 
 const firebaseGetItems = () => firestore.collection('items').get();
 
+const firebaseAddReview = (uid, review, item_id) => firestore.collection('users').doc(uid).collection('comments').doc(item_id).set(review);
+
+
+const firebaseGetReviews = () => firestore.collectionGroup('comments').orderBy('createdAt', 'desc').get()
+
+export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+
 export {
   firebaseSignInWithGoogle, 
   generateId, 
@@ -48,5 +55,9 @@ export {
   firebaseSignOut, 
   firebaseAddUser, 
   firebaseGetUser,
-  firebaseGetItems
+  firebaseGetItems,
+  firebaseAddReview,
+  firebaseGetReviews
 }
+
+

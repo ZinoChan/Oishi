@@ -6,10 +6,11 @@ import { wrapper } from "store";
 import { useEffect } from "react";
 import { onAuthSuccess } from "@slices/authSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@lib/firebase";
+import { auth, serverTimestamp } from "@lib/firebase";
 import { useDispatch } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import Loader from "@components/Loader";
+import { addReview } from "@slices/reviewsSlice";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);
@@ -19,6 +20,16 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if (user) {
       dispatch(onAuthSuccess(user));
+      const review = {
+        content: "first from me",
+        createdAt: serverTimestamp(),
+        id: "kjsalja",
+        movie_id: "12",
+        user_id: user.uid,
+        user_name: "zino",
+      };
+      dispatch(addReview({ uid: user.uid, review, item_id: "12" }));
+      console.log(user.uid);
     }
   }, [user]);
 

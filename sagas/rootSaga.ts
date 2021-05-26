@@ -3,6 +3,8 @@ import { takeLatest } from "@redux-saga/core/effects";
 import getItemsSaga from "./itemsSaga";
 import { onAuthSuccess, signInWithGoogle, signOut } from '@slices/authSlice';
 import authSaga from './authSaga';
+import { addReview, deleteReview, getReviews } from '@slices/reviewsSlice';
+import reviewsSaga from './reviewsSaga';
 
 export default function* rootSaga(){
     yield takeLatest(getItems.type, getItemsSaga),
@@ -10,5 +12,10 @@ export default function* rootSaga(){
         signInWithGoogle.type,
         onAuthSuccess.type,
         signOut.type,
-    ], authSaga)
+    ], authSaga),
+    yield takeLatest([
+        getReviews.type,
+        addReview.type,
+        deleteReview.type
+    ], reviewsSaga)
 }

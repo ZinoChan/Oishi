@@ -10,6 +10,7 @@ import {Store} from 'redux'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import authSlice, { onAuthSuccess, signOutSuccess } from '@slices/authSlice';
 import profileSlice from '@slices/profileSlice';
+import { addReview } from '@slices/reviewsSlice';
 export interface SagaStore extends Store {
     sagaTask?: Task
 }
@@ -27,7 +28,7 @@ export const makeStore = (context: Context) => {
         },
         middleware: (getDefaultMiddleware) => 
             getDefaultMiddleware({thunk: false, serializableCheck: {
-                ignoredActions: [onAuthSuccess.type, signOutSuccess.type]
+                ignoredActions: [onAuthSuccess.type, signOutSuccess.type, addReview.type]
             }}).concat(logger, sagaMiddleware)
     });
 
