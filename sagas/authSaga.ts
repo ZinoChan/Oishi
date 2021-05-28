@@ -39,7 +39,8 @@ function* authSaga({type, payload}) {
                 yield put(setProfile(user))
                 yield put(signInSuccess({
                     id: payload.uid,
-                    role: 'USER'
+                    role: 'USER',
+                    user_name: payload.displayName ? payload.displayName : 'User',
                 }))
                 
                 

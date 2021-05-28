@@ -1,3 +1,4 @@
+import AuthPopup from "@components/AuthPopup";
 import { CustomDialog } from "react-st-modal";
 import AddReview from "./AddReview";
 
@@ -11,6 +12,22 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
       }
     );
   };
+
+  const onLoginClick = async () => {
+    const result = await CustomDialog(
+      <AuthPopup dispatch={dispatch} auth={auth} />,
+      {
+        title: "Register to review",
+        showCloseIcon: true,
+      }
+    );
+  };
+
+  const alreadyReviewed = reviews?.find(
+    (review) => review.user_id === auth?.id
+  );
+
+  console.log(alreadyReviewed);
 
   return (
     <div className="bg-white border border-gray-200 rounded-md py-6 px-4">
@@ -27,7 +44,10 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
           </button>
         )}
         {!auth?.id && (
-          <button className="bg-secondary text-black px-4 rounded py-1 text-md font-main">
+          <button
+            onClick={onLoginClick}
+            className="bg-secondary text-black px-4 rounded py-1 text-md font-main"
+          >
             login to review
           </button>
         )}

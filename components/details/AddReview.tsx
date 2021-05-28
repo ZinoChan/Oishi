@@ -1,7 +1,6 @@
-import { serverTimestamp } from "@lib/firebase";
+import { generateId, serverTimestamp } from "@lib/firebase";
 import { addReview } from "@slices/reviewsSlice";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { useDialog } from "react-st-modal";
 
 const AddReview = ({ dispatch, uid, itemId }) => {
@@ -10,18 +9,18 @@ const AddReview = ({ dispatch, uid, itemId }) => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = ({ review }) => {
+    const id = generateId();
+
     const user_review = {
       content: review,
       user_id: uid,
       item_id: itemId,
       createdAt: serverTimestamp(),
       user_name: "zino",
-      id: "lkjdlakzj",
+      id,
     };
 
     dispatch(addReview({ uid, review: user_review, item_id: itemId }));
-
-    toast.success("review added successfully");
   };
 
   return (

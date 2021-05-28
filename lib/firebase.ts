@@ -37,7 +37,7 @@ const firebaseGetUser = (id) => firestore.collection('users').doc(id).get();
 
  const addItems = (id, item) => firestore.collection('items').doc(id).set(item);
 
- const generateId = () => firestore.collection('items').doc().id;
+ const generateId = () => firestore.collection('users').doc().id;
 
 const firebaseGetItems = () => firestore.collection('items').get();
 
