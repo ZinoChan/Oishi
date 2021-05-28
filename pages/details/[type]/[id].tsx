@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Cart from "@components/menu/Cart";
 import toast from "react-hot-toast";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { firebaseGetReviews, firestore } from "@lib/firebase";
+import firebase from "firebase/app";
 
 const ItemDetails = () => {
   const router = useRouter();
@@ -17,7 +20,7 @@ const ItemDetails = () => {
     (state: { items: any; cart: any; auth: any }) => ({
       items: state.items,
       cart: state.cart,
-      auth: state.auth && !!state.auth.id,
+      auth: state.auth,
     })
   );
 
@@ -45,6 +48,14 @@ const ItemDetails = () => {
 
     toast.success("order added to basket");
   };
+
+  const reviewsQuery = firestore
+    .collectionGroup("reviews")
+    .where("item_id", "==", "7");
+
+  const [realTimeReviews] = useCollection(reviewsQuery);
+
+  const reviews = realTimeReviews?.docs.map((doc) => doc.data());
 
   return (
     <>
@@ -90,7 +101,12 @@ const ItemDetails = () => {
                 </div>
               </div>
               <div className="xl:col-span-1 lg:col-span-2">
-                <Reviews auth={auth} />
+                <Reviews
+                  dispatch={dispatch}
+                  auth={auth}
+                  reviews={reviews}
+                  itemId={id}
+                />
               </div>
             </div>
           </div>

@@ -41,10 +41,10 @@ const firebaseGetUser = (id) => firestore.collection('users').doc(id).get();
 
 const firebaseGetItems = () => firestore.collection('items').get();
 
-const firebaseAddReview = (uid, review, item_id) => firestore.collection('users').doc(uid).collection('comments').doc(item_id).set(review);
+const firebaseAddReview = (uid, review, item_id) => firestore.collection('users').doc(uid).collection('reviews').doc(item_id).set(review);
 
 
-const firebaseGetReviews = () => firestore.collectionGroup('comments').orderBy('createdAt', 'desc').get()
+const firebaseGetReviews = () => firestore.collectionGroup('reviews').where('item_id', '==', '12').orderBy('createdAt', 'desc')
 
 export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 

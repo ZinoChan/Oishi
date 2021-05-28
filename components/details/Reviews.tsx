@@ -1,12 +1,15 @@
 import { CustomDialog } from "react-st-modal";
 import AddReview from "./AddReview";
 
-const Reviews = ({ auth }) => {
+const Reviews = ({ dispatch, auth, reviews, itemId }) => {
   const onAddReview = async () => {
-    const result = await CustomDialog(<AddReview />, {
-      title: "Add Review",
-      showCloseIcon: true,
-    });
+    const result = await CustomDialog(
+      <AddReview dispatch={dispatch} uid={auth.id} itemId={itemId} />,
+      {
+        title: "Add Review",
+        showCloseIcon: true,
+      }
+    );
   };
 
   return (
@@ -15,7 +18,7 @@ const Reviews = ({ auth }) => {
         <h3 className="font-main text-md font-bold capitalize mb-2">
           Custumer reviews
         </h3>
-        {auth && (
+        {!!auth?.id && (
           <button
             onClick={onAddReview}
             className="px-4 py-2 self-center bg-secondary text-black px-4 rounded py-1 text-md font-main"
@@ -23,29 +26,24 @@ const Reviews = ({ auth }) => {
             add review
           </button>
         )}
-        {!auth && (
+        {!auth?.id && (
           <button className="bg-secondary text-black px-4 rounded py-1 text-md font-main">
             login to review
           </button>
         )}
       </div>
       <div>
-        <div className="flex justify-between mb-2">
-          <div>
-            <h4 className="font-main font-bold text-lg mb-1">Sakata</h4>
-            <p className="font-poppins text-md">
-              So delicies and fast delivery thank you
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-between">
-          <div>
-            <h4 className="font-main font-bold text-lg mb-1">Hijikata</h4>
-            <p className="font-poppins text-md">
-              So delicies and fast delivery thank you
-            </p>
-          </div>
-        </div>
+        {reviews?.length > 0 &&
+          reviews.map(({ id, user_name, content }) => (
+            <div className="flex justify-between mb-2" key={id}>
+              <div>
+                <h4 className="font-main font-bold text-lg mb-1">
+                  {user_name}
+                </h4>
+                <p className="font-poppins text-md">{content}</p>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );

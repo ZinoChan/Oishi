@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { serverTimestamp } from "@lib/firebase";
+import { addReview } from "@slices/reviewsSlice";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useDialog } from "react-st-modal";
 
-const AddReview = () => {
+const AddReview = ({ dispatch, uid, itemId }) => {
   const dialog = useDialog();
 
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = ({ review }) => {
+    const user_review = {
+      content: review,
+      user_id: uid,
+      item_id: itemId,
+      createdAt: serverTimestamp(),
+      user_name: "zino",
+      id: "lkjdlakzj",
+    };
+
+    dispatch(addReview({ uid, review: user_review, item_id: itemId }));
+
+    toast.success("review added successfully");
+  };
 
   return (
     <div className="p-4">

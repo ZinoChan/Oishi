@@ -20,16 +20,6 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if (user) {
       dispatch(onAuthSuccess(user));
-      const review = {
-        content: "first from me",
-        createdAt: serverTimestamp(),
-        id: "kjsalja",
-        movie_id: "12",
-        user_id: user.uid,
-        user_name: "zino",
-      };
-      dispatch(addReview({ uid: user.uid, review, item_id: "12" }));
-      console.log(user.uid);
     }
   }, [user]);
 
