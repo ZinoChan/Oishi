@@ -56,8 +56,6 @@ const ItemDetails = () => {
 
   const reviews = realTimeReviews?.docs.map((doc) => doc.data());
 
-  console.log(reviews);
-
   return (
     <>
       {item_details && (

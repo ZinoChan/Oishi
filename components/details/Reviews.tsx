@@ -1,16 +1,36 @@
 import AuthPopup from "@components/AuthPopup";
 import { CustomDialog } from "react-st-modal";
 import AddReview from "./AddReview";
+import EditReview from "./EditReview";
 
 const Reviews = ({ dispatch, auth, reviews, itemId }) => {
+  const alreadyReviewed = reviews?.find(
+    (review) => review.user_id === auth?.id
+  );
+
   const onAddReview = async () => {
-    const result = await CustomDialog(
-      <AddReview dispatch={dispatch} uid={auth.id} itemId={itemId} />,
-      {
-        title: "Add Review",
-        showCloseIcon: true,
-      }
-    );
+    if (!alreadyReviewed) {
+      const result = await CustomDialog(
+        <AddReview dispatch={dispatch} uid={auth.id} itemId={itemId} />,
+        {
+          title: "Add Review",
+          showCloseIcon: true,
+        }
+      );
+    } else {
+      const result = await CustomDialog(
+        <EditReview
+          review={alreadyReviewed}
+          dispatch={dispatch}
+          uid={auth.id}
+          item_id={itemId}
+        />,
+        {
+          title: "Add Review",
+          showCloseIcon: true,
+        }
+      );
+    }
   };
 
   const onLoginClick = async () => {
@@ -22,12 +42,6 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
       }
     );
   };
-
-  const alreadyReviewed = reviews?.find(
-    (review) => review.user_id === auth?.id
-  );
-
-  console.log(alreadyReviewed);
 
   return (
     <div className="bg-white border border-gray-200 rounded-md py-6 px-4">

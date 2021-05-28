@@ -43,10 +43,12 @@ const firebaseGetItems = () => firestore.collection('items').get();
 
 const firebaseAddReview = (uid, review, item_id) => firestore.collection('users').doc(uid).collection('reviews').doc(item_id).set(review);
 
-
-const firebaseGetReviews = () => firestore.collectionGroup('reviews').where('item_id', '==', '12').orderBy('createdAt', 'desc')
-
 export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+const firebaseEditReview = (uid, content, item_id) => firestore.collection('users').doc(uid).collection('reviews').doc(item_id).update({content, updatedAT: serverTimestamp()})
+
+
+
 
 export {
   firebaseSignInWithGoogle, 
@@ -57,7 +59,7 @@ export {
   firebaseGetUser,
   firebaseGetItems,
   firebaseAddReview,
-  firebaseGetReviews
+  firebaseEditReview
 }
 
 
