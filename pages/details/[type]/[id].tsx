@@ -51,11 +51,13 @@ const ItemDetails = () => {
 
   const reviewsQuery = firestore
     .collectionGroup("reviews")
-    .where("item_id", "==", "7");
+    .where("item_id", "==", id);
 
   const [realTimeReviews] = useCollection(reviewsQuery);
 
   const reviews = realTimeReviews?.docs.map((doc) => doc.data());
+
+  console.log(reviews);
 
   return (
     <>
