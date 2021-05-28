@@ -8,8 +8,7 @@ import { useState } from "react";
 import Cart from "@components/menu/Cart";
 import toast from "react-hot-toast";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { firebaseGetReviews, firestore } from "@lib/firebase";
-import firebase from "firebase/app";
+import { firestore } from "@lib/firebase";
 
 const ItemDetails = () => {
   const router = useRouter();
