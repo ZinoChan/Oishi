@@ -1,4 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getCookie, setCookie } from "hooks/useCookie";
+
+const CART = 'CART';
 
 export interface CartItem {
         id: number;
@@ -9,46 +12,51 @@ export interface CartItem {
         quantity: number;
 }
 
-const initialState : CartItem[] = [
-    {
-        id: 1,
-        item_name: "Margherita",
-        item_image: "/images/pizza 1.png",
-        category: "pizza",
-        quantity: 2,
-        price: 8
-    },
-]
+
+const initialState : CartItem[] = getCookie(CART);
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
         addItem: (state, action: PayloadAction<CartItem>) => {
-            return  state.some(item => item.id === action.payload.id) ? 
+            const cart =  state.some(item => item.id === action.payload.id) ? 
             [...state] : [{...action.payload}, ...state]
+            setCookie(CART, cart)
+            return cart;
+            
         },
         removeItem: (state, action: PayloadAction<number>) => {
-            return state.filter(item => item.id !== action.payload);
+            const cart =  state.filter(item => item.id !== action.payload);
+            setCookie(CART, cart);
+            return cart;
         },
         addQty: (state, action: PayloadAction<number>) => {
-            return state.map(item => {
+            const cart =  state.map(item => {
                 if(item.id === action.payload) {
                     return {...item, quantity: item.quantity + 1}
                 }
                 return item
             })
+
+            setCookie(CART, cart);
+            return cart;
         },
         minusQty: (state, action: PayloadAction<number>) => {
-            return state.map(item => {
+            const cart =  state.map(item => {
                 if(item.id === action.payload) {
                     return {...item, quantity: item.quantity - 1}
                 }
                 return item
             })
+
+            setCookie(CART, cart);
+            return cart;
         },
         clearCart: (state, action) => {
-            return []
+            const cart = [];
+            setCookie(CART, cart);
+            return cart;
         }
     }
 })

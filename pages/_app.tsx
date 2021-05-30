@@ -6,11 +6,10 @@ import { wrapper } from "store";
 import { useEffect } from "react";
 import { onAuthSuccess } from "@slices/authSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, serverTimestamp } from "@lib/firebase";
+import { auth } from "@lib/firebase";
 import { useDispatch } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import Loader from "@components/Loader";
-import { addReview } from "@slices/reviewsSlice";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);

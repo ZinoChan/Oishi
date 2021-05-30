@@ -1,7 +1,10 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getCookie, setCookie } from "hooks/useCookie";
 import { HYDRATE } from "next-redux-wrapper";
 
 const hydrate = createAction(HYDRATE);
+
+const ITEMS = 'ITEMS';
 
 interface Items {
     id: number;
@@ -18,7 +21,7 @@ export interface ItemsState {
     items: Items[]
 }
 
-const initialState: ItemsState[] = [];
+const initialState: ItemsState[] = getCookie(ITEMS);
 
 const itemsSlice = createSlice({
     name: "items",
@@ -27,16 +30,18 @@ const itemsSlice = createSlice({
         getItems () {},
         
         getItemsSuccess: (state, action: PayloadAction<ItemsState[]>) => {
-            return [...action.payload]
+            return [...action.payload]  
         },
     },
     extraReducers(builder) {
         builder.addCase(hydrate, (state, action) => {
            
-            return [
+            const items =  [
                 ...state,
                 ...(action.payload as any)[itemsSlice.name],
             ]
+            setCookie(ITEMS, items)
+            return items;
         })
     }
     

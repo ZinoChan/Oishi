@@ -17,11 +17,7 @@ const reviewsSlice = createSlice({
     name: 'reviews',
     initialState: [],
     reducers: {
-        getReviews(){},
-
-        getReviewsSuccess: (state, action) => {
-            return [...state, action.payload]
-        },
+       
 
         getReviewsError(state, action){},
 
@@ -32,17 +28,10 @@ const reviewsSlice = createSlice({
         editReview(state, action){},
     },
 
-    extraReducers(builder) {
-        builder.addCase(hydrate, (state, action) => {
-            return [
-                ...state,
-                ...(action.payload as any)[reviewsSlice.name]
-            ]
-        })
-    }
+   
 })
 
 
-export const {getReviews, getReviewsError, getReviewsSuccess, addReview, deleteReview, editReview} = reviewsSlice.actions
+export const {getReviewsError,  addReview, deleteReview, editReview} = reviewsSlice.actions
 
 export default reviewsSlice.reducer;
