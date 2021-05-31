@@ -22,7 +22,8 @@ function* authSaga({type, payload}) {
                 yield put(setProfile(user));
                 yield put(signInSuccess({
                     id: payload.uid,
-                    role: 'USER'
+                    role: 'USER',
+                    user_name: user.fullname
                 }))
             }else if(payload.providerData[0].providerId !== 'password' && !snapshot.data()){
                 const user = {
