@@ -2,7 +2,7 @@ import "tailwindcss/tailwind.css";
 import "@fontsource/pacifico";
 import "@fontsource/poppins";
 import "@fontsource/quicksand/700.css";
-import { persistor, wrapper } from "store";
+import { wrapper } from "store";
 import { useEffect } from "react";
 import { onAuthSuccess } from "@slices/authSlice";
 import { useAuthState } from "react-firebase-hooks/auth";

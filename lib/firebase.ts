@@ -47,6 +47,7 @@ export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 const firebaseEditReview = (uid, content, item_id) => firestore.collection('users').doc(uid).collection('reviews').doc(item_id).update({content, updatedAT: serverTimestamp()})
 
+const firebaseDeleteReview = (uid,item_id) => firestore.collection('users').doc(uid).collection('reviews').doc(item_id).delete();
 
 
 
@@ -59,7 +60,8 @@ export {
   firebaseGetUser,
   firebaseGetItems,
   firebaseAddReview,
-  firebaseEditReview
+  firebaseEditReview,
+  firebaseDeleteReview
 }
 
 

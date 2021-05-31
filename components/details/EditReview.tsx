@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDialog } from "react-st-modal";
 
-const EditReview = ({ dispatch, uid, item_id, review }) => {
+const EditReview = ({ dispatch, uid, item_id, review, edit = false }) => {
   const [showInput, setShowInput] = useState(false);
 
   const { register, handleSubmit, reset } = useForm();
@@ -16,7 +16,9 @@ const EditReview = ({ dispatch, uid, item_id, review }) => {
 
   return (
     <div className="p-4 text-center">
-      <h2 className="text-red-400 font-main">You already added a review</h2>
+      {!edit && (
+        <h2 className="text-red-400 font-main">You already added a review</h2>
+      )}
       <p className="text-poppins text-xl">Your review : "{review.content}"</p>
       <form
         className="flex flex-col space-y-4"
@@ -30,10 +32,10 @@ const EditReview = ({ dispatch, uid, item_id, review }) => {
             showInput ? "block" : "hidden"
           } p-2 bg-gray-50 border border border-gray-300  text-gray-700 text-md font-poppins`}
         />
-        <div className="flex justify-between">
+        <div className="text-center">
           {showInput && (
             <button
-              className="bg-primary text-white px-4 py-2 rounded"
+              className="focus:outline-none bg-primary text-white px-4 py-2 rounded"
               type="submit"
               onClick={() => {
                 dialog.close();
@@ -42,30 +44,29 @@ const EditReview = ({ dispatch, uid, item_id, review }) => {
               Submit
             </button>
           )}
-
-          {!showInput && (
-            <button
-              className="bg-primary text-white px-4 py-2 rounded"
-              type="submit"
-              onClick={() => {
-                setShowInput(true);
-              }}
-            >
-              Edit
-            </button>
-          )}
-
-          <button
-            className="bg-black text-white  px-4 py-2 rounded"
-            type="submit"
-            onClick={() => {
-              dialog.close();
-            }}
-          >
-            cancel
-          </button>
         </div>
       </form>
+      <div className="flex justify-between">
+        {!showInput && (
+          <button
+            className="focus:outline-none bg-primary text-white px-4 py-2 rounded"
+            onClick={() => {
+              setShowInput(true);
+            }}
+          >
+            Edit
+          </button>
+        )}
+
+        <button
+          className="focus:outline-none bg-black text-white  px-4 py-2 rounded"
+          onClick={() => {
+            dialog.close();
+          }}
+        >
+          cancel
+        </button>
+      </div>
     </div>
   );
 };

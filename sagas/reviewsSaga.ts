@@ -1,6 +1,6 @@
-import { firebaseAddReview, firebaseEditReview } from "@lib/firebase";
-import {  call, put } from "@redux-saga/core/effects";
-import { addReview, editReview,} from "@slices/reviewsSlice";
+import { firebaseAddReview, firebaseDeleteReview, firebaseEditReview } from "@lib/firebase";
+import {  call } from "@redux-saga/core/effects";
+import { addReview, deleteReview, editReview,} from "@slices/reviewsSlice";
 import toast from "react-hot-toast";
 
 
@@ -24,6 +24,16 @@ function* reviewsSaga({type, payload}){
             } catch (err) {
                 console.log(err)
                 yield toast.error('an error accured ')
+            }
+        break;
+
+        case deleteReview.type:
+            try {
+               
+                yield call(firebaseDeleteReview, payload.uid, payload.item_id)
+                yield toast.success('reviews deleted')
+            } catch (err) {
+                console.log(err.message)
             }
     }
 }

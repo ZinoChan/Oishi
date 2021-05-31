@@ -1,7 +1,7 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getCookie, setCookie } from "hooks/useCookie";
+
 import { HYDRATE } from "next-redux-wrapper";
-import  Cookies  from 'universal-cookie';
+
 
 const hydrate = createAction(HYDRATE);
 
@@ -21,7 +21,7 @@ export interface ItemsState {
     items: Items[]
 }
 
-const cookies = new Cookies()
+
 
 const initialState: ItemsState[] = [];
 
