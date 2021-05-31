@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setCookie } from "hooks/useCookie";
 import { CartItem } from "./cartSlice";
 
 interface ProfileState {
@@ -21,7 +22,9 @@ const profileSlice = createSlice({
     initialState,
     reducers: {
         setProfile: (state, action) => {
-            return action.payload
+           return action.payload
+           
+          
         },
 
         updateProfile: (state, action) => {

@@ -6,37 +6,75 @@ import { Context, createWrapper } from 'next-redux-wrapper';
 import itemsSlice from '@slices/itemsSlice';
 import appSlice from '@slices/appSlice';
 import cartSlice from '@slices/cartSlice';
-import {Store} from 'redux'
+import {combineReducers, Store} from 'redux'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import authSlice, { onAuthSuccess, signOutSuccess } from '@slices/authSlice';
 import profileSlice from '@slices/profileSlice';
 import reviewsSlice, { addReview } from '@slices/reviewsSlice';
+import storage from 'redux-persist/lib/storage'
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist'
+
 export interface SagaStore extends Store {
     sagaTask?: Task
 }
 
+const rootReducer = combineReducers({
+    app: appSlice,
+    items: itemsSlice,
+    cart: cartSlice,
+    auth: authSlice,
+    profile: profileSlice,
+    reviews: reviewsSlice
+})
 
-export const makeStore = (context: Context) => {
+
+
+const makeConfiguredStore = (reducer) => {
     const sagaMiddleware = createSagaMiddleware();
     const store = configureStore({
-        reducer: {
-            app: appSlice,
-            items: itemsSlice,
-            cart: cartSlice,
-            auth: authSlice,
-            profile: profileSlice,
-            reviews: reviewsSlice
-        },
+        reducer,
         middleware: (getDefaultMiddleware) => 
             getDefaultMiddleware({thunk: false, serializableCheck: {
-                ignoredActions: [onAuthSuccess.type, signOutSuccess.type, addReview.type]
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, onAuthSuccess.type, signOutSuccess.type, addReview.type]
             }}).concat(logger, sagaMiddleware)
     });
 
     (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
 
     return store;
+}
 
+export const makeStore = (context: Context = null) => {
+   const isServer = typeof window === 'undefined';
+
+   if(isServer) {
+       return makeConfiguredStore(rootReducer)
+   }else{
+    const {persistStore, persistReducer} = require('redux-persist');
+    const storage = require('redux-persist/lib/storage').default;
+
+    const persistConfig = {
+        key: 'root',
+        whitelist: ['items', 'cart'], 
+        storage
+    };
+
+    const persistedReducer = persistReducer(persistConfig, rootReducer)
+    const store = makeConfiguredStore(persistedReducer);
+
+    store.__persistor = persistStore(store);
+
+    return store;
+   }
 }
 
 

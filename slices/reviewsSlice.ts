@@ -1,8 +1,8 @@
-import { createAction, createSlice } from "@reduxjs/toolkit";
-import { HYDRATE } from "next-redux-wrapper";
+import {  createSlice } from "@reduxjs/toolkit";
 
 
-const hydrate = createAction(HYDRATE);
+
+
 
 // const review = {
 //     content: "",

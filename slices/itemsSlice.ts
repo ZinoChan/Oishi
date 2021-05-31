@@ -1,10 +1,10 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getCookie, setCookie } from "hooks/useCookie";
 import { HYDRATE } from "next-redux-wrapper";
+import  Cookies  from 'universal-cookie';
 
 const hydrate = createAction(HYDRATE);
 
-const ITEMS = 'ITEMS';
 
 interface Items {
     id: number;
@@ -21,7 +21,9 @@ export interface ItemsState {
     items: Items[]
 }
 
-const initialState: ItemsState[] = getCookie(ITEMS);
+const cookies = new Cookies()
+
+const initialState: ItemsState[] = [];
 
 const itemsSlice = createSlice({
     name: "items",
@@ -40,12 +42,14 @@ const itemsSlice = createSlice({
                 ...state,
                 ...(action.payload as any)[itemsSlice.name],
             ]
-            setCookie(ITEMS, items)
+           
             return items;
         })
     }
     
 })
+
+
 
 
 export const {getItems, getItemsSuccess} = itemsSlice.actions

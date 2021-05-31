@@ -5,6 +5,7 @@ import { getItemsSuccess } from 'slices/itemsSlice';
 import { toast } from 'react-hot-toast';
 
 
+
 function* getItemsSaga(){
    try {
        yield put(getItemsLoading(true))
@@ -12,7 +13,9 @@ function* getItemsSaga(){
        
         if(snapshot.docs){
             const items = snapshot.docs.map(doc => doc.data())
+       
             yield put(getItemsSuccess(items))
+            
         }else{
             toast.error("no food was found ");
         }

@@ -13,5 +13,10 @@ export function getCookie(key) {
 }
 
 export function setCookie(key, value) {
+    console.log(value, "setting cookie")
+    console.log(JSON.stringify(value));
     jsCookie.set(key, JSON.stringify(value));
+
+
 }
+
