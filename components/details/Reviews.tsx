@@ -118,6 +118,11 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
               )}
             </div>
           ))}
+        {reviews?.length === 0 && (
+          <h3 className="text-center fony-poppins text-xl">
+            There is no reviews for this food
+          </h3>
+        )}
       </div>
     </div>
   );

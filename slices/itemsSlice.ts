@@ -38,12 +38,14 @@ const itemsSlice = createSlice({
     extraReducers(builder) {
         builder.addCase(hydrate, (state, action) => {
            
-            const items =  [
+            let nextState =  [
                 ...state,
                 ...(action.payload as any)[itemsSlice.name],
             ]
+
+            if(state.length > 0) nextState = state
            
-            return items;
+            return nextState;
         })
     }
     
