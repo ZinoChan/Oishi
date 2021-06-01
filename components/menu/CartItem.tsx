@@ -21,8 +21,9 @@ const CartItem = ({ id, item_name, item_image, price, quantity }) => {
         </button>
         <div className="flex space-x-2">
           <button
+            disabled={quantity === 1}
             onClick={() => dispatch(minusQty(id))}
-            className="rounded-full w-6 h-6 flex items-center bg-primary text-white justify-center text-md font-poppins font-bold"
+            className="disabled:cursor-not-allowed disabled:opacity-70 rounded-full w-6 h-6 flex items-center bg-primary text-white justify-center text-md font-poppins font-bold"
           >
             -
           </button>

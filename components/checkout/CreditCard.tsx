@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { cardValidation } from "helpers/yupValidation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 
 const CreditCard = () => {
   const {
@@ -113,9 +114,11 @@ const CreditCard = () => {
         </div>
       </div>
       <div className="mt-4 col-span-3 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
-        <button className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
-          back to billing
-        </button>
+        <Link href="/checkout/billing">
+          <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
+            back to billing
+          </a>
+        </Link>
         <button
           type="submit"
           className="font-main text-white bg-primary  border-2 border-primary  px-4 py-1 rounded "

@@ -23,7 +23,7 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
         <EditReview
           review={alreadyReviewed}
           dispatch={dispatch}
-          uid={auth.id}
+          uid={auth?.id}
           item_id={itemId}
         />,
         {
@@ -39,7 +39,7 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
       <EditReview
         review={alreadyReviewed}
         dispatch={dispatch}
-        uid={auth.id}
+        uid={auth?.id}
         item_id={itemId}
         edit={true}
       />,
@@ -51,13 +51,10 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
   };
 
   const onLoginClick = async () => {
-    const result = await CustomDialog(
-      <AuthPopup dispatch={dispatch} auth={auth} />,
-      {
-        title: "Register to review",
-        showCloseIcon: true,
-      }
-    );
+    const result = await CustomDialog(<AuthPopup dispatch={dispatch} />, {
+      title: "Register to review",
+      showCloseIcon: true,
+    });
   };
 
   return (
@@ -93,7 +90,7 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
                 </h4>
                 <p className="font-poppins text-md">{content}</p>
               </div>
-              {auth.id === user_id && (
+              {auth?.id === user_id && (
                 <div className="flex flex-col justify-between">
                   <button
                     onClick={() =>

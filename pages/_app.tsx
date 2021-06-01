@@ -11,6 +11,7 @@ import { useDispatch, useStore } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import Loader from "@components/Loader";
 import { PersistGate } from "redux-persist/integration/react";
+import { authLoading } from "@slices/appSlice";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);
@@ -18,23 +19,25 @@ function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (loading) {
+      dispatch(authLoading(true));
+    } else {
+      dispatch(authLoading(false));
+    }
+
     if (user) {
       dispatch(onAuthSuccess(user));
     }
-  }, [user]);
+  }, [user, loading]);
 
   const store = useStore();
 
   return (
     <PersistGate persistor={store.__persistor} loading={<Loader />}>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Component {...pageProps} />
-          <Toaster />
-        </>
-      )}
+      <>
+        <Component {...pageProps} />
+        <Toaster />
+      </>
     </PersistGate>
   );
 }

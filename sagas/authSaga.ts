@@ -30,8 +30,7 @@ function* authSaga({type, payload}) {
                     fullname: payload.displayName ? payload.displayName : 'User',
                     email: payload.email,
                     address: '',
-                    zipCode: '',
-                    city: '',
+                    postalCode: '',
                     basket: [],
                     mobile: '',
                     dateJoined: payload.metadata.creationTime

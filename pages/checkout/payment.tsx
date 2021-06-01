@@ -15,7 +15,7 @@ const Payment = () => {
 
   return (
     <WithAuth>
-      <Navigation />
+      <Navigation current="payment" />
       <section className="min-h-screen sm:py-0 py-20 flex items-center">
         <div className="max-w-screen-md px-2 w-full mx-auto">
           <div className="flex justify-between items-center flex-wrap">
@@ -45,6 +45,9 @@ const Payment = () => {
               <p className="font-main text-md text-center leading-normal py-16">
                 Pay to the delivery man at delivery time
               </p>
+              <button className="font-main text-white bg-primary border-2 border-primary px-4 py-1 rounded">
+                Confirm
+              </button>
             </div>
           )}
         </div>

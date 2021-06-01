@@ -1,8 +1,7 @@
 import { signInWithGoogle } from "@slices/authSlice";
-import { useEffect } from "react";
 import { useDialog } from "react-st-modal";
 
-const AuthPopup = ({ dispatch, auth }) => {
+const AuthPopup = ({ dispatch }) => {
   const dialog = useDialog();
 
   const onGoogleRegister = () => {

@@ -29,7 +29,7 @@ const authSlice = createSlice({
 
         onAuthSuccess: (state, action) => {},
 
-        authLoading: (state, action) => {},
+       
 
       
        

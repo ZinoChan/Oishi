@@ -4,8 +4,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { billingValidation } from "helpers/yupValidation";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Billing = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -15,11 +19,14 @@ const Billing = () => {
     resolver: yupResolver(billingValidation),
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    router.push("/checkout/payment");
+  };
 
   return (
     <WithAuth>
-      <Navigation />
+      <Navigation current="billing" />
       <section className="min-h-screen py-20 flex items-center">
         <div className="max-w-screen-md px-2 w-full mx-auto">
           <button className="font-main bg-black text-white  px-4 py-1 rounded ">
@@ -86,9 +93,12 @@ const Billing = () => {
             </div>
 
             <div className=" col-span-2 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
-              <button className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
-                back to details
-              </button>
+              <Link href="/checkout/orderDetails">
+                <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
+                  back to details
+                </a>
+              </Link>
+
               <button
                 type="submit"
                 className="font-main text-white bg-primary mb-4 border-2 border-primary  px-4 py-1 rounded "

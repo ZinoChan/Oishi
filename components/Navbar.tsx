@@ -3,10 +3,11 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = ({ setOpenCart = null }) => {
-  const { cartLength, userExists } = useSelector(
-    (state: { cart: any; auth: any }) => ({
+  const { cartLength, userExists, authLoading } = useSelector(
+    (state: { cart: any; auth: any; app: any }) => ({
       cartLength: state.cart.length,
       userExists: !!state.auth?.id,
+      authLoading: state.app?.authLoading,
     })
   );
 
@@ -45,15 +46,15 @@ const Navbar = ({ setOpenCart = null }) => {
               </span>
             </button>
           )}
-          {userExists && (
+          {!authLoading && userExists && (
             <button
               onClick={() => dispatch(signOut())}
               className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase"
             >
-              Profile
+              log out
             </button>
           )}
-          {!userExists && (
+          {!authLoading && !userExists && (
             <button
               onClick={() => dispatch(signInWithGoogle())}
               className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase"
