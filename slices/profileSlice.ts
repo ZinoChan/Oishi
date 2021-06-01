@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setCookie } from "hooks/useCookie";
 import { CartItem } from "./cartSlice";
 
 interface ProfileState {
     fullname: string;
     email: string;
     address: string;
-    zipCode: string;
-    city: string;
+    postalCode: string;
     basket: CartItem[];
     mobile: string;
     dateJoined: string;
@@ -23,11 +21,13 @@ const profileSlice = createSlice({
     reducers: {
         setProfile: (state, action) => {
            return action.payload
-           
           
         },
 
-        updateProfile: (state, action) => {
+        updateProfile(state,action){},
+
+
+        updateProfileSuccess: (state, action) => {
             return {
                 ...state,
                 ...action.payload
@@ -41,7 +41,7 @@ const profileSlice = createSlice({
 })
 
 
-export const { setProfile, updateProfile, clearProfile} = profileSlice.actions;
+export const { setProfile, updateProfile, updateProfileSuccess, clearProfile, } = profileSlice.actions;
 
 
 export default profileSlice.reducer;

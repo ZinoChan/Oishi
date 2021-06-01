@@ -49,6 +49,9 @@ const firebaseEditReview = (uid, content, item_id) => firestore.collection('user
 
 const firebaseDeleteReview = (uid,item_id) => firestore.collection('users').doc(uid).collection('reviews').doc(item_id).delete();
 
+const firebaseUpdateProfile = (id, updates) => firestore.collection('users').doc(id).update(updates)
+
+
 
 
 export {
@@ -61,7 +64,9 @@ export {
   firebaseGetItems,
   firebaseAddReview,
   firebaseEditReview,
-  firebaseDeleteReview
+  firebaseDeleteReview,
+  firebaseUpdateProfile,
+
 }
 
 

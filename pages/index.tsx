@@ -1,8 +1,6 @@
 import styles from "@styles/Home.module.css";
 import Link from "next/link";
 import Navbar from "@components/Navbar";
-import { useEffect } from "react";
-import { serverTimestamp } from "@lib/firebase";
 
 export default function Home() {
   return (

@@ -13,7 +13,7 @@ export const billingValidation = Yup.object().shape({
     .matches(/^[0-9]*$/, "please enter valide postal code")
     .min(3, "zip code must be more than 3")
     .max(5, "zip code must be less than 5"),
-    phone: Yup.string()
+    mobile: Yup.string()
     .required("this field is required")
     .matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, "please enter valid phone number")
     .max(14, "phone number must be less than 14 digits")

@@ -3,8 +3,19 @@ import { cardValidation } from "helpers/yupValidation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { Alert } from "react-st-modal";
+import { useRouter } from "next/router";
+// import { useDispatch, useSelector } from "react-redux";
 
 const CreditCard = () => {
+  const router = useRouter();
+
+  // const { cart, uid } = useSelector((state: { cart: any; auth: any }) => ({
+  //   cart: state.cart,
+  //   uid: state.auth?.uid,
+  // }));
+  // const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -14,7 +25,11 @@ const CreditCard = () => {
     resolver: yupResolver(cardValidation),
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    Alert("Payment confirmed succcessfully", "done");
+
+    router.push("/menu");
+  };
 
   return (
     <form

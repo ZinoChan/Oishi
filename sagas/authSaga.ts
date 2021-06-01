@@ -31,7 +31,6 @@ function* authSaga({type, payload}) {
                     email: payload.email,
                     address: '',
                     postalCode: '',
-                    basket: [],
                     mobile: '',
                     dateJoined: payload.metadata.creationTime
                 }

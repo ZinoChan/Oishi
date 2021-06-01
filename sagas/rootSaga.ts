@@ -5,6 +5,8 @@ import { onAuthSuccess, signInWithGoogle, signOut } from '@slices/authSlice';
 import authSaga from './authSaga';
 import { addReview, deleteReview, editReview } from '@slices/reviewsSlice';
 import reviewsSaga from './reviewsSaga';
+import {  updateProfile } from '@slices/profileSlice';
+import profileSaga from './profileSaga';
 
 export default function* rootSaga(){
     yield takeLatest(getItems.type, getItemsSaga),
@@ -17,5 +19,9 @@ export default function* rootSaga(){
         addReview.type,
         editReview.type,
         deleteReview.type
-    ], reviewsSaga)
+    ], reviewsSaga),
+    yield takeLatest([
+        updateProfile.type,
+        
+    ], profileSaga)
 }

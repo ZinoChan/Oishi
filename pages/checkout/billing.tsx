@@ -6,9 +6,27 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { billingValidation } from "helpers/yupValidation";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProfile } from "@slices/profileSlice";
 
 const Billing = () => {
   const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const { profile, uid } = useSelector(
+    (state: { profile: any; auth: any }) => ({
+      profile: state.profile,
+      uid: state.auth?.id,
+    })
+  );
+
+  const defaultValues = {
+    fullname: profile.fullname,
+    address: profile.adress,
+    postalCode: profile.postalCode,
+    mobile: profile.mobile,
+  };
 
   const {
     register,
@@ -17,10 +35,21 @@ const Billing = () => {
     reset,
   } = useForm({
     resolver: yupResolver(billingValidation),
+    defaultValues,
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    const profileUpdates = {};
+    for (let key in data) {
+      if (data[key] !== profile[key]) {
+        profileUpdates[key] = data[key];
+      }
+    }
+
+    if (Object.keys(profileUpdates).length > 0) {
+      dispatch(updateProfile({ id: uid, updates: profileUpdates }));
+    }
+
     router.push("/checkout/payment");
   };
 
@@ -29,9 +58,6 @@ const Billing = () => {
       <Navigation current="billing" />
       <section className="min-h-screen py-20 flex items-center">
         <div className="max-w-screen-md px-2 w-full mx-auto">
-          <button className="font-main bg-black text-white  px-4 py-1 rounded ">
-            Edit
-          </button>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="my-6 grid md:grid-cols-2 grid-cols-1 gap-4"
@@ -43,6 +69,7 @@ const Billing = () => {
               <input
                 {...register("fullname")}
                 type="text"
+                defaultValue={profile.fullname}
                 className="border border-gray-200 rounded p-2"
               />
               <span className="text-red-300 text-sm font-main">
@@ -56,6 +83,7 @@ const Billing = () => {
               </label>
               <input
                 type="text"
+                defaultValue={profile.address}
                 className="border border-gray-200 rounded p-2"
                 {...register("address")}
               />
@@ -71,6 +99,7 @@ const Billing = () => {
               <input
                 {...register("postalCode")}
                 type="text"
+                defaultValue={profile.postalCode}
                 className="border border-gray-200 rounded p-2"
               />
               <span className="text-red-300 text-sm font-main">
@@ -78,17 +107,18 @@ const Billing = () => {
               </span>
             </div>
             <div className="flex flex-col space-y-2">
-              <label htmlFor="Phone" className="font-main text-md">
-                Phone
+              <label htmlFor="mobile" className="font-main text-md">
+                mobile
               </label>
               <input
                 type="text"
-                {...register("phone")}
+                {...register("mobile")}
+                defaultValue={profile.mobile}
                 className="border border-gray-200 rounded p-2"
               />
 
               <span className="text-red-300 text-sm font-main">
-                {errors?.phone?.message}
+                {errors?.mobile?.message}
               </span>
             </div>
 
