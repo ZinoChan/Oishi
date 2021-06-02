@@ -7,6 +7,8 @@ import { addReview, deleteReview, editReview } from '@slices/reviewsSlice';
 import reviewsSaga from './reviewsSaga';
 import {  updateProfile } from '@slices/profileSlice';
 import profileSaga from './profileSaga';
+import { setOrders } from '@slices/ordersSlice';
+import ordersSaga from './ordersSaga';
 
 export default function* rootSaga(){
     yield takeLatest(getItems.type, getItemsSaga),
@@ -23,5 +25,8 @@ export default function* rootSaga(){
     yield takeLatest([
         updateProfile.type,
         
-    ], profileSaga)
+    ], profileSaga),
+    yield takeLatest([
+        setOrders.type
+    ], ordersSaga)
 }

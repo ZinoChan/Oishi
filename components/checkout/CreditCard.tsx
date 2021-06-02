@@ -3,18 +3,20 @@ import { cardValidation } from "helpers/yupValidation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { Alert } from "react-st-modal";
+import { CustomDialog } from "react-st-modal";
 import { useRouter } from "next/router";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setOrders } from "@slices/ordersSlice";
+import { serverTimestamp } from "@lib/firebase";
 
 const CreditCard = () => {
   const router = useRouter();
 
-  // const { cart, uid } = useSelector((state: { cart: any; auth: any }) => ({
-  //   cart: state.cart,
-  //   uid: state.auth?.uid,
-  // }));
-  // const dispatch = useDispatch();
+  const { cart, uid } = useSelector((state: { cart: any; auth: any }) => ({
+    cart: state.cart,
+    uid: state.auth?.id,
+  }));
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -26,9 +28,36 @@ const CreditCard = () => {
   });
 
   const onSubmit = (data) => {
-    Alert("Payment confirmed succcessfully", "done");
+    dispatch(
+      setOrders({ id: uid, orders: { cart, orderAt: serverTimestamp() } })
+    );
+    CustomDialog(
+      <div className="p-4 text-center">
+        <h2 className="text-primary text-xl font-bold font-main">
+          Payment confirmed successuflly
+        </h2>
+        <div className="flex justify-between">
+          <button
+            onClick={() => router.push("/menu")}
+            className="font-main text-white bg-primary  border-primary  px-4 py-1 rounded "
+          >
+            menu
+          </button>
+          <button
+            onClick={() => router.push("/")}
+            className="font-main text-white bg-primary  border-primary  px-4 py-1 rounded "
+          >
+            Orders
+          </button>
+        </div>
+      </div>,
+      {
+        title: "Done",
+        showCloseIcon: true,
+      }
+    );
 
-    router.push("/menu");
+    // router.push("/menu");
   };
 
   return (

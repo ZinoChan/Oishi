@@ -51,7 +51,7 @@ const firebaseDeleteReview = (uid,item_id) => firestore.collection('users').doc(
 
 const firebaseUpdateProfile = (id, updates) => firestore.collection('users').doc(id).update(updates)
 
-
+const firebaseSetOrders = (id, orders) => firestore.collection('users').doc(id).collection('orders').add(orders);
 
 
 export {
@@ -66,7 +66,7 @@ export {
   firebaseEditReview,
   firebaseDeleteReview,
   firebaseUpdateProfile,
-
+  firebaseSetOrders
 }
 
 

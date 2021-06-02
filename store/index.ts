@@ -11,10 +11,8 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import authSlice, { onAuthSuccess, signOutSuccess } from '@slices/authSlice';
 import profileSlice from '@slices/profileSlice';
 import reviewsSlice, { addReview } from '@slices/reviewsSlice';
-import storage from 'redux-persist/lib/storage'
+
 import {
-    persistStore,
-    persistReducer,
     FLUSH,
     REHYDRATE,
     PAUSE,
@@ -22,6 +20,7 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist'
+import ordersSlice, { setOrders } from '@slices/ordersSlice';
 
 export interface SagaStore extends Store {
     sagaTask?: Task
@@ -33,7 +32,8 @@ const rootReducer = combineReducers({
     cart: cartSlice,
     auth: authSlice,
     profile: profileSlice,
-    reviews: reviewsSlice
+    reviews: reviewsSlice,
+    orders: ordersSlice
 })
 
 
@@ -44,7 +44,7 @@ const makeConfiguredStore = (reducer) => {
         reducer,
         middleware: (getDefaultMiddleware) => 
             getDefaultMiddleware({thunk: false, serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, onAuthSuccess.type, signOutSuccess.type, addReview.type]
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, setOrders.type, onAuthSuccess.type, signOutSuccess.type, addReview.type]
             }}).concat(logger, sagaMiddleware)
     });
 

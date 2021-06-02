@@ -1,7 +1,7 @@
 import Navigation from "@components/checkout/Navigation";
 import WithAuth from "@components/WithAuth";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { billingValidation } from "helpers/yupValidation";
 import Link from "next/link";
@@ -21,21 +21,14 @@ const Billing = () => {
     })
   );
 
-  const defaultValues = {
-    fullname: profile.fullname,
-    address: profile.adress,
-    postalCode: profile.postalCode,
-    mobile: profile.mobile,
-  };
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
+    mode: "onSubmit",
+    reValidateMode: "onSubmit",
     resolver: yupResolver(billingValidation),
-    defaultValues,
   });
 
   const onSubmit = (data) => {
@@ -66,10 +59,10 @@ const Billing = () => {
               <label htmlFor="Full Name" className="font-main text-md">
                 Full Name
               </label>
+
               <input
                 {...register("fullname")}
                 type="text"
-                defaultValue={profile.fullname}
                 className="border border-gray-200 rounded p-2"
               />
               <span className="text-red-300 text-sm font-main">
@@ -83,7 +76,6 @@ const Billing = () => {
               </label>
               <input
                 type="text"
-                defaultValue={profile.address}
                 className="border border-gray-200 rounded p-2"
                 {...register("address")}
               />
@@ -99,7 +91,6 @@ const Billing = () => {
               <input
                 {...register("postalCode")}
                 type="text"
-                defaultValue={profile.postalCode}
                 className="border border-gray-200 rounded p-2"
               />
               <span className="text-red-300 text-sm font-main">
@@ -113,7 +104,6 @@ const Billing = () => {
               <input
                 type="text"
                 {...register("mobile")}
-                defaultValue={profile.mobile}
                 className="border border-gray-200 rounded p-2"
               />
 

@@ -14,13 +14,13 @@ const Customize = () => {
     (item) => item.ingredient_name === currentIngredient
   );
 
-  const food_types = ["pizza", "burger", "donuts", "drinks"];
+  const food_types = ["pizza", "burger"];
 
   return (
     <section className="min-h-screen flex items-center py-20 bg-light_gray">
       <Navbar />
       <div className="max-w-screen-md w-full px-2 mx-auto">
-        <div className="flex items-center justify-between flex-wrap">
+        <div className="flex items-center justify-center space-x-4 flex-wrap">
           {food_types.map((food_type, index) => (
             <button
               onClick={() => setCurrentFoodType(food_type)}
@@ -44,26 +44,28 @@ const Customize = () => {
               current_food?.ingredients.map((item, index) => (
                 <h4
                   key={`${item.ingredient_name}-${index}`}
-                  className="font-poppins font-bold capitalize cursor-pointer hover:text-secondary"
+                  className={`${
+                    currentIngredient === item.ingredient_name &&
+                    "text-primary font-bold"
+                  } font-poppins capitalize cursor-pointer hover:text-primary`}
                   onClick={() => setCurrentIngredient(item.ingredient_name)}
                 >
                   {item.ingredient_name}
                 </h4>
               ))}
           </div>
-          {ingredient &&
-            ingredient?.ingredients_collection.map(
-              ({ id, name, price, price_per, quantity, img }) => (
-                <Ingredient
-                  key={id}
-                  name={name}
-                  img={img}
-                  price={price}
-                  price_per={price_per}
-                  quantity={quantity}
-                />
-              )
-            )}
+          {ingredient?.ingredients_collection.map(
+            ({ id, name, price, price_per, quantity, img }) => (
+              <Ingredient
+                key={id}
+                name={name}
+                img={img}
+                price={price}
+                price_per={price_per}
+                quantity={quantity}
+              />
+            )
+          )}
         </div>
         <SumTotal />
       </div>

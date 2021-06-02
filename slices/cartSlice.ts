@@ -11,7 +11,7 @@ export interface CartItem {
 }
 
 
-const initialState : CartItem[] = [];
+const initialState : CartItem[]  = [];
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -47,7 +47,7 @@ const cartSlice = createSlice({
 
           
         },
-        clearCart: (state, action) => {
+        clearCart: () => {
             return [];
             
         }
