@@ -41,6 +41,7 @@ const ItemDetails = () => {
       price: item_details.price,
       category: item_details.category,
       quantity: 1,
+      ingredients: null,
     };
 
     dispatch(addItem(order));

@@ -17,6 +17,7 @@ const MenuItem = ({ cart, id, category, item_image, price, item_name }) => {
       price,
       category,
       quantity: 1,
+      ingredients: null,
     };
 
     dispatch(addItem(order));

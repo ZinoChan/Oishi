@@ -1,29 +1,58 @@
 import Ingredient from "@components/customize order/Ingredient";
 import SumTotal from "@components/customize order/SumTotal";
+import Cart from "@components/menu/Cart";
 import Navbar from "@components/Navbar";
+import { clearCustomize } from "@slices/customizeSlice";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Confirm, useDialog } from "react-st-modal";
 import { makeNew } from "../data/data";
 
 const Customize = () => {
+  const [openCart, setOpenCart] = useState(false);
   const [currentFoodType, setCurrentFoodType] = useState("pizza");
   const [currentIngredient, setCurrentIngredient] = useState("veggies");
-
   const current_food = makeNew.find((types) => types.type === currentFoodType);
-
-  const ingredient = current_food?.ingredients.find(
+  const ingredient_type = current_food?.ingredients.find(
     (item) => item.ingredient_name === currentIngredient
   );
-
   const food_types = ["pizza", "burger"];
+
+  const dispatch = useDispatch();
+  const dialog = useDialog();
+
+  const underCustomization = useSelector(
+    (state: { customized: any }) => state.customized?.length > 0
+  );
+
+  const handleFoodSwitch = async (food_type) => {
+    if (underCustomization) {
+      const result = await Confirm(
+        `You already customizing a ${currentFoodType} do you like to concel the process`,
+        "alert"
+      );
+      if (result) {
+        dispatch(clearCustomize());
+        setCurrentFoodType(food_type);
+        setCurrentIngredient("veggies");
+      } else {
+        dialog.close();
+      }
+    } else {
+      setCurrentFoodType(food_type);
+      setCurrentIngredient("veggies");
+    }
+  };
 
   return (
     <section className="min-h-screen flex items-center py-20 bg-light_gray">
-      <Navbar />
+      <Cart openCart={openCart} setOpenCart={setOpenCart} />
+      <Navbar setOpenCart={setOpenCart} />
       <div className="max-w-screen-md w-full px-2 mx-auto">
         <div className="flex items-center justify-center space-x-4 flex-wrap">
           {food_types.map((food_type, index) => (
             <button
-              onClick={() => setCurrentFoodType(food_type)}
+              onClick={() => handleFoodSwitch(food_type)}
               key={`${food_type}-${index}`}
               className={`${
                 currentFoodType !== food_type && "opacity-70"
@@ -54,20 +83,20 @@ const Customize = () => {
                 </h4>
               ))}
           </div>
-          {ingredient?.ingredients_collection.map(
-            ({ id, name, price, price_per, quantity, img }) => (
+          {ingredient_type?.ingredients_collection.map(
+            ({ id, name, price, price_per, img }) => (
               <Ingredient
                 key={id}
                 name={name}
                 img={img}
                 price={price}
                 price_per={price_per}
-                quantity={quantity}
+                id={id}
               />
             )
           )}
         </div>
-        <SumTotal />
+        <SumTotal food_type={currentFoodType} />
       </div>
     </section>
   );

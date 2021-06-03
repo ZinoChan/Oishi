@@ -21,6 +21,7 @@ import {
     REGISTER,
 } from 'redux-persist'
 import ordersSlice, { setOrders } from '@slices/ordersSlice';
+import customizeSlice from '@slices/customizeSlice';
 
 export interface SagaStore extends Store {
     sagaTask?: Task
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
     auth: authSlice,
     profile: profileSlice,
     reviews: reviewsSlice,
-    orders: ordersSlice
+    orders: ordersSlice,
+    customized: customizeSlice
 })
 
 

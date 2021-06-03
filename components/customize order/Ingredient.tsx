@@ -1,6 +1,23 @@
-import React from "react";
+import { addIngredient, minusIngredient } from "@slices/customizeSlice";
+import React, { useState } from "react";
 
-const Ingredient = ({ name, price, price_per, quantity, img }) => {
+import { useDispatch } from "react-redux";
+
+const Ingredient = ({ id, name, price, price_per, img }) => {
+  const dispatch = useDispatch();
+
+  const [item_quantity, setItemQty] = useState(0);
+
+  const onAddQty = () => {
+    setItemQty(item_quantity + 1);
+    dispatch(addIngredient({ name, price, id }));
+  };
+
+  const onMinusQty = () => {
+    setItemQty(item_quantity - 1);
+    dispatch(minusIngredient({ id }));
+  };
+
   return (
     <div className="flex max-w-sm mx-auto items-center justify-between mb-4 border border-gray-200 sm:p-2 p-1 flex-wrap">
       <div className="flex space-x-6 items-center">
@@ -14,11 +31,18 @@ const Ingredient = ({ name, price, price_per, quantity, img }) => {
       </div>
       <div className="flex flex-col items-center justify-between">
         <div className="flex space-x-2">
-          <button className="rounded w-6 h-6 flex items-center bg-secondary justify-center text-md font-poppins font-bold">
+          <button
+            onClick={onAddQty}
+            className="rounded w-6 h-6 flex items-center bg-secondary justify-center text-md font-poppins font-bold"
+          >
             +
           </button>
-          <span>{quantity}</span>
-          <button className="rounded w-6 h-6 flex items-center bg-secondary justify-center text-md font-poppins font-bold">
+          <span>{item_quantity}</span>
+          <button
+            disabled={item_quantity === 0}
+            onClick={onMinusQty}
+            className="disabled:cursor-not-allowed rounded w-6 h-6 flex items-center bg-secondary justify-center text-md font-poppins font-bold"
+          >
             -
           </button>
         </div>
