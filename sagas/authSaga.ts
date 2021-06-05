@@ -1,5 +1,5 @@
-import { firebaseAddUser, firebaseGetUser, firebaseSignInWithGoogle, firebaseSignOut } from '@lib/firebase';
-import { onAuthSuccess, signInSuccess, signInWithGoogle, signOut, signOutSuccess } from '@slices/authSlice';
+import { firebaseAddUser, firebaseGetUser, firebaseSignInWithFacebook, firebaseSignInWithGoogle, firebaseSignOut } from '@lib/firebase';
+import { onAuthSuccess, signInSuccess, signInWithGoogle, signInWithFacebook, signOut, signOutSuccess } from '@slices/authSlice';
 import { setProfile } from '@slices/profileSlice';
 import { call, put } from 'redux-saga/effects'
 
@@ -14,6 +14,15 @@ function* authSaga({type, payload}) {
                 console.log(err.message)
             }
         break;
+
+        case signInWithFacebook.type:
+            try {
+               yield call(firebaseSignInWithFacebook)
+            } catch (err) {
+                console.log(err.message)
+            }
+        break;
+
         case onAuthSuccess.type:
             const snapshot = yield call(firebaseGetUser, payload.uid);
 
@@ -54,9 +63,7 @@ function* authSaga({type, payload}) {
                 } catch (err) {
                     console.log(err.message)
                 }
-
-
-
+            break;
     }
 }
 

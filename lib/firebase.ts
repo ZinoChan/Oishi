@@ -29,6 +29,10 @@ const firebaseSignInWithGoogle = () => (
     auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
 )
 
+const firebaseSignInWithFacebook = () => {
+  auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+}
+
 const firebaseSignOut = () => auth.signOut();
 
 const firebaseAddUser = (id, user) => firestore.collection('users').doc(id).set(user);
@@ -56,6 +60,7 @@ const firebaseSetOrders = (id, orders) => firestore.collection('users').doc(id).
 
 export {
   firebaseSignInWithGoogle, 
+  firebaseSignInWithFacebook,
   generateId, 
   addItems, 
   firebaseSignOut, 

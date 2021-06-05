@@ -47,7 +47,10 @@ const SumTotal = ({ food_type }: AppProps) => {
       const order = {
         id: uuidv4(),
         item_name: `customized ${food_type}`,
-        item_image: "",
+        item_image:
+          food_type === "pizza"
+            ? "/images/pizza-illustration.png"
+            : "/images/burger-illustration.png",
         price: totalPrice,
         category: food_type,
         quantity: qty,
@@ -56,6 +59,7 @@ const SumTotal = ({ food_type }: AppProps) => {
       dispatch(addItem(order));
       toast.success("order added to basket");
       dispatch(clearCustomize());
+      setQty(1);
     }
   };
 
@@ -63,13 +67,13 @@ const SumTotal = ({ food_type }: AppProps) => {
     <div className="flex items-center max-w-screen-md mx-auto justify-between mt-4 flex-wrap">
       <div>
         <h3 className="font-poppins text-md capitalize ">
-          Baking Price: {backingPrice}
+          Baking Price: {backingPrice}$
         </h3>
         <h3 className="font-poppins text-md capitalize ">
           Total Ingredients Price: {(ingredientsPrice() * qty).toFixed(2)}$
         </h3>
         <h3 className="font-poppins text-md capitalize font-bold">
-          Total Price: {totalPrice}
+          Total Price: {totalPrice}$
         </h3>
       </div>
 

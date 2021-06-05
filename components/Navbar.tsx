@@ -55,12 +55,11 @@ const Navbar = ({ setOpenCart = null }) => {
             </button>
           )}
           {!authLoading && !userExists && (
-            <button
-              onClick={() => dispatch(signInWithGoogle())}
-              className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase"
-            >
-              Log in
-            </button>
+            <Link href="/register">
+              <a className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase">
+                Log in
+              </a>
+            </Link>
           )}
         </ul>
       </nav>

@@ -5,6 +5,7 @@ import { END } from "@redux-saga/core";
 import { getItems } from "@slices/itemsSlice";
 import { SagaStore, wrapper } from "@store/index";
 import styles from "@styles/Menu.module.css";
+import Link from "next/link";
 
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -43,23 +44,30 @@ const Menu = () => {
       <Navbar setOpenCart={setOpenCart} />
       <div className="max-w-screen-xl px-2 mx-auto w-full">
         <h1 className="font-main text-3xl capitalize mb-10">Main menu</h1>
-        <div className="flex items-center sm:justify-center sm:space-x-6 justify-between mb-10 sm:flex-no-wrap  flex-wrap">
-          {menuIcons.map((icon, index) => (
-            <div
-              key={`${icon.name}-${index}`}
-              onClick={() => setCurrentFood(icon.name)}
-              className="rounded-xl border border-gray-200 text-center w-16 p-1 hover:border-primary cursor-pointer"
-            >
-              <img
-                src={icon.src}
-                className="w-10 h-10 mx-auto"
-                alt={icon.name}
-              />
-              <span className="text-md text-gray-600 capitalize font-poppins font-bold">
-                {icon.name}
-              </span>
-            </div>
-          ))}
+        <div className="flex justify-between items-center max-w-screen-md mx-auto mb-10">
+          <div className="flex items-center sm:justify-center sm:space-x-6 justify-between sm:flex-no-wrap  flex-wrap">
+            {menuIcons.map((icon, index) => (
+              <div
+                key={`${icon.name}-${index}`}
+                onClick={() => setCurrentFood(icon.name)}
+                className="rounded-xl border border-gray-200 text-center w-16 p-1 hover:border-primary cursor-pointer"
+              >
+                <img
+                  src={icon.src}
+                  className="w-10 h-10 mx-auto"
+                  alt={icon.name}
+                />
+                <span className="text-md text-gray-600 capitalize font-poppins font-bold">
+                  {icon.name}
+                </span>
+              </div>
+            ))}
+          </div>
+          <Link href="/customize">
+            <a className=" focus:outline-none transition-all hover:shadow-btn_lg shadow-btn px-4 py-2 font-bold rounded bg-primary text-white font-main text-sm">
+              Customize order
+            </a>
+          </Link>
         </div>
         <div
           className={`${styles.menu} grid grid-cols-2 md:grid-cols-auto-4 md:gap-8 gap-4   justify-center`}

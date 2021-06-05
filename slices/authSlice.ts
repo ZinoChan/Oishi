@@ -15,6 +15,8 @@ const authSlice = createSlice({
     reducers: {
         signInWithGoogle () {},
 
+        signInWithFacebook () {},
+
         signOut() {},
 
         signInSuccess: (state, action) => {
@@ -38,6 +40,6 @@ const authSlice = createSlice({
 })
 
 
-export const { signInWithGoogle, signInSuccess, signOut,  signOutSuccess, onAuthSuccess } = authSlice.actions
+export const { signInWithGoogle, signInSuccess, signOut,  signOutSuccess, onAuthSuccess, signInWithFacebook } = authSlice.actions
 
 export default authSlice.reducer;

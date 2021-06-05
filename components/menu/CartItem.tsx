@@ -1,4 +1,5 @@
 import { addQty, minusQty, removeItem } from "@slices/cartSlice";
+import Image from "next/image";
 import { useDispatch } from "react-redux";
 
 const CartItem = ({ id, item_name, item_image, price, quantity }) => {
@@ -6,9 +7,15 @@ const CartItem = ({ id, item_name, item_image, price, quantity }) => {
 
   return (
     <div className="bg-white rounded-lg px-2 py-4 flex justify-between  space-x-4 mb-6">
-      <img src={item_image} className="w-20 h-auto" alt="pizza" />
+      <Image
+        width={80}
+        height={80}
+        src={item_image}
+        className="w-20 h-auto"
+        alt="pizza"
+      />
       <div>
-        <h3 className="font-main  text-xl mb-1">
+        <h3 className="font-poppins  text-md mb-1">
           {item_name} x {quantity}
         </h3>
         <span className="text-poppins font-bold text-md text-red-500">
@@ -23,13 +30,13 @@ const CartItem = ({ id, item_name, item_image, price, quantity }) => {
           <button
             disabled={quantity === 1}
             onClick={() => dispatch(minusQty(id))}
-            className="disabled:cursor-not-allowed disabled:opacity-70 rounded-full w-6 h-6 flex items-center bg-primary text-white justify-center text-md font-poppins font-bold"
+            className="disabled:cursor-not-allowed disabled:opacity-70 rounded-full w-6 h-6 flex items-center bg-secondary  justify-center text-md font-poppins font-bold"
           >
             -
           </button>
           <button
             onClick={() => dispatch(addQty(id))}
-            className="rounded-full w-6 h-6 flex items-center bg-primary text-white  justify-center text-md font-poppins font-bold"
+            className="rounded-full w-6 h-6 flex items-center bg-secondary   justify-center text-md font-poppins font-bold"
           >
             +
           </button>

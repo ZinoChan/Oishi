@@ -4,7 +4,7 @@ import Image from "next/image";
 import { addItem } from "@slices/cartSlice";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cart from "@components/menu/Cart";
 import toast from "react-hot-toast";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -49,12 +49,19 @@ const ItemDetails = () => {
     toast.success("order added to basket");
   };
 
-  const reviewsQuery = firestore
-    .collectionGroup("reviews")
-    .where("item_id", "==", id);
+  const [reviewsQuery, setQueryReviews] = useState(null);
+
+  useEffect(() => {
+    if (id) {
+      const query = firestore
+        .collectionGroup("reviews")
+        .where("item_id", "==", id);
+
+      setQueryReviews(query);
+    }
+  }, [id]);
 
   const [realTimeReviews] = useCollection(reviewsQuery);
-
   const reviews = realTimeReviews?.docs.map((doc) => doc.data());
 
   return (

@@ -1,20 +1,23 @@
 import { addIngredient, minusIngredient } from "@slices/customizeSlice";
-import React, { useState } from "react";
+import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Ingredient = ({ id, name, price, price_per, img }) => {
   const dispatch = useDispatch();
 
-  const [item_quantity, setItemQty] = useState(0);
+  //find if the ingredient already selected to set its quantity or set it to 0 if not
+  const ingredientSelected = useSelector((state: { customized: any }) =>
+    state.customized.find((item) => item.id === id)
+  );
+
+  const itemQty = ingredientSelected?.quantity;
 
   const onAddQty = () => {
-    setItemQty(item_quantity + 1);
     dispatch(addIngredient({ name, price, id }));
   };
 
   const onMinusQty = () => {
-    setItemQty(item_quantity - 1);
     dispatch(minusIngredient({ id }));
   };
 
@@ -37,9 +40,9 @@ const Ingredient = ({ id, name, price, price_per, img }) => {
           >
             +
           </button>
-          <span>{item_quantity}</span>
+          <span>{itemQty || 0}</span>
           <button
-            disabled={item_quantity === 0}
+            disabled={!itemQty || itemQty === 0}
             onClick={onMinusQty}
             className="disabled:cursor-not-allowed rounded w-6 h-6 flex items-center bg-secondary justify-center text-md font-poppins font-bold"
           >
