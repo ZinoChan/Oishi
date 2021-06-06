@@ -25,6 +25,8 @@ const  firebaseConfig = {
 
 //Auth
 
+const firebaseSignIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
+
 const firebaseSignInWithGoogle = () => (
     auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
 )
@@ -59,6 +61,7 @@ const firebaseSetOrders = (id, orders) => firestore.collection('users').doc(id).
 
 
 export {
+  firebaseSignIn,
   firebaseSignInWithGoogle, 
   firebaseSignInWithFacebook,
   generateId, 

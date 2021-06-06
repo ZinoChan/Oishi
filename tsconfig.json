@@ -19,9 +19,9 @@
       "@components/*": ["./components/*"],
       "@public/*": ["./public/*"],
       "@styles/*": ["./styles/*"],
-      "@sagas/*": ["./sagas/*"],
-      "@slices/*": ["./slices/*"],
-      "@store/*": ["./store/*"],
+      "@sagas/*": ["./redux/sagas/*"],
+      "@slices/*": ["./redux/slices/*"],
+      "@store/*": ["./redux/store/*"],
       "@lib/*": ["./lib/*"]
     }
   },

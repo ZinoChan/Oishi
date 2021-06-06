@@ -1,7 +1,7 @@
 import { firebaseGetItems } from '@lib/firebase';
 import {call, put} from 'redux-saga/effects'
-import { getItemsError, getItemsLoading } from 'slices/appSlice';
-import { getItemsSuccess } from 'slices/itemsSlice';
+import { getItemsError, getItemsLoading } from '@slices/appSlice';
+import { getItemsSuccess } from '@slices/itemsSlice';
 import { toast } from 'react-hot-toast';
 
 
