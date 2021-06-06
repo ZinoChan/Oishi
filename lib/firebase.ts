@@ -25,6 +25,8 @@ const  firebaseConfig = {
 
 //Auth
 
+const firebaseCreateAccount = (email, password) => auth.createUserWithEmailAndPassword(email, password)
+
 const firebaseSignIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
 
 const firebaseSignInWithGoogle = () => (
@@ -61,6 +63,7 @@ const firebaseSetOrders = (id, orders) => firestore.collection('users').doc(id).
 
 
 export {
+  firebaseCreateAccount,
   firebaseSignIn,
   firebaseSignInWithGoogle, 
   firebaseSignInWithFacebook,

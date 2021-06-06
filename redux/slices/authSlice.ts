@@ -13,6 +13,10 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        createAccount: (state, action) => {},
+
+        signIn: (state, action) => {},
+
         signInWithGoogle () {},
 
         signInWithFacebook () {},
@@ -29,17 +33,12 @@ const authSlice = createSlice({
             return action.payload
         },
 
-        onAuthSuccess: (state, action) => {},
-
-       
-
-      
-       
+        onAuthSuccess: (state, action) => {}, 
         
     }
 })
 
 
-export const { signInWithGoogle, signInSuccess, signOut,  signOutSuccess, onAuthSuccess, signInWithFacebook } = authSlice.actions
+export const {signIn, createAccount, signInWithGoogle, signInSuccess, signOut,  signOutSuccess, onAuthSuccess, signInWithFacebook } = authSlice.actions
 
 export default authSlice.reducer;

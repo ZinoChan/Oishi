@@ -47,3 +47,12 @@ export const paypalValidation = Yup.object().shape({
     password: Yup.string()
     .required("this field is required")
 })
+
+export const signInValidation = Yup.object().shape({
+    email: Yup.string()
+    .required("this field is required")
+    .email("please enter a valid email"),
+    password: Yup.string()
+    .required("this field is required")
+    .min(8, 'password must contain at least 8 characters')
+})

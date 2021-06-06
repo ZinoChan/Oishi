@@ -12,7 +12,8 @@
             "@slices": "./redux/slices",
             "@sagas": "./redux/sagas",
             "@store": "./redux/store",
-            "@lib": "./lib"
+            "@lib": "./lib",
+            "@helpers": "./helpers"
 
           }
         }

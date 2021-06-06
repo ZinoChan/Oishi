@@ -22,7 +22,8 @@
       "@sagas/*": ["./redux/sagas/*"],
       "@slices/*": ["./redux/slices/*"],
       "@store/*": ["./redux/store/*"],
-      "@lib/*": ["./lib/*"]
+      "@lib/*": ["./lib/*"],
+      "@helpers/*": ["./helpers/*"]
     }
   },
   "exclude": ["node_modules"],

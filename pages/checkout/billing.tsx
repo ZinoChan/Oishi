@@ -26,8 +26,6 @@ const Billing = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: "onSubmit",
-    reValidateMode: "onSubmit",
     resolver: yupResolver(billingValidation),
   });
 

@@ -96,7 +96,7 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
                     onClick={() =>
                       dispatch(deleteReview({ uid: auth?.id, item_id }))
                     }
-                    className="focus:outline-none"
+                    className="focus:outline-none mb-2"
                   >
                     <img
                       className="w-4 h-4"
