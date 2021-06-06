@@ -1,4 +1,4 @@
-import AuthPopup from "@components/AuthPopup";
+import AuthPopup from "@components/auth/AuthPopup";
 import { deleteReview } from "@slices/reviewsSlice";
 import { CustomDialog } from "react-st-modal";
 import AddReview from "./AddReview";

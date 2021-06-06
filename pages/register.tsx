@@ -8,12 +8,14 @@ import {
 } from "@slices/authSlice";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signInValidation } from "@helpers/yupValidation";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@lib/firebase";
 import Loader from "@components/Loader";
+import { Alert, CustomDialog } from "react-st-modal";
+import AuthError from "@components/auth/AuthError";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -21,14 +23,23 @@ const Register = () => {
 
   const [user, loading, error] = useAuthState(auth);
 
+  const authError = useSelector((state: { app: any }) => state.app.authError);
+
   const router = useRouter();
 
   useEffect(() => {
+    if (authError) {
+      // Alert(authError?.message, "Error");
+      CustomDialog(<AuthError message={authError?.message} />, {
+        title: "Error",
+        showCloseIcon: true,
+      });
+    }
     if (user && router.route === "/register") {
       dispatch(onAuthSuccess(user));
       router.push("/menu");
     }
-  }, [user]);
+  }, [user, authError]);
 
   const {
     register,

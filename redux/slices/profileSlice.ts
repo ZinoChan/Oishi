@@ -34,7 +34,7 @@ const profileSlice = createSlice({
             }
         },
 
-        clearProfile: (state, action) => {
+        clearProfile: () => {
             return {}
         }
     }
