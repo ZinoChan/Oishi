@@ -13,9 +13,10 @@ import { signInValidation } from "@helpers/yupValidation";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@lib/firebase";
-import Loader from "@components/Loader";
-import { Alert, CustomDialog } from "react-st-modal";
+import { CustomDialog } from "react-st-modal";
 import AuthError from "@components/auth/AuthError";
+import AuthLoader from "@components/auth/AuthLoader";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -23,21 +24,24 @@ const Register = () => {
 
   const [user, loading, error] = useAuthState(auth);
 
-  const authError = useSelector((state: { app: any }) => state.app.authError);
+  const { authError, authLoading } = useSelector((state: { app: any }) => ({
+    authError: state.app.authError,
+    authLoading: state.app.authLoading,
+  }));
 
   const router = useRouter();
 
   useEffect(() => {
     if (authError) {
-      // Alert(authError?.message, "Error");
       CustomDialog(<AuthError message={authError?.message} />, {
         title: "Error",
         showCloseIcon: true,
       });
     }
-    if (user && router.route === "/register") {
+    if (user) {
       dispatch(onAuthSuccess(user));
-      router.push("/menu");
+      router.back();
+      toast.success("successfully logged in");
     }
   }, [user, authError]);
 
@@ -61,8 +65,8 @@ const Register = () => {
 
   return (
     <>
-      {loading && <Loader />}
-      {!loading && (
+      {(authLoading || loading) && <AuthLoader />}
+      {!authLoading && !loading && (
         <section
           style={{ backgroundImage: "url(/images/home-bg.jpg)" }}
           className="min-h-screen flex items-center md:py-0 bg-cover bg-center sm:px-0 overflow-x-hidden px-2 py-20"

@@ -34,7 +34,8 @@ function* handleError(err) {
 }
 
 function* initRequest() {
-    yield put(authError(null))
+    yield put(authError(null));
+    yield put(authLoading(true));
 }
 
 function* authSaga({type, payload}) {
@@ -54,6 +55,7 @@ function* authSaga({type, payload}) {
 
                 yield call(firebaseAddUser, ref.user.uid, user);
                 yield put(setProfile(user));
+                yield put(authLoading(false));
 
             } catch (err) {
                 yield handleError(err)
@@ -63,15 +65,17 @@ function* authSaga({type, payload}) {
         case signIn.type:
             try {
                 yield initRequest()
-                yield call(firebaseSignIn, payload.email, payload.password)
+                yield call(firebaseSignIn, payload.email, payload.password);
+                yield put(authLoading(false));
             } catch (err) {
                 yield handleError(err);
             }
         break;
         case signInWithGoogle.type:
             try {
-                yield initRequest()
-                yield call(firebaseSignInWithGoogle)
+                yield initRequest();
+                yield call(firebaseSignInWithGoogle);
+                yield put(authLoading(false));
             } catch (err) {
                 yield handleError(err)
             }
@@ -80,7 +84,8 @@ function* authSaga({type, payload}) {
         case signInWithFacebook.type:
             try {
                 yield initRequest();
-               yield call(firebaseSignInWithFacebook)
+               yield call(firebaseSignInWithFacebook);
+               yield put(authLoading(false));
             } catch (err) {
                 yield handleError(err)
             }
@@ -114,7 +119,7 @@ function* authSaga({type, payload}) {
                     user_name: payload.displayName ? payload.displayName : 'User',
                 }))
             }
-            toast.success('successfully logged in')
+          
 
             break;
 
@@ -125,6 +130,7 @@ function* authSaga({type, payload}) {
                     yield put(clearCart())
                     yield put(clearProfile())
                     yield put(signOutSuccess(null))
+                    yield put(authLoading(false));
                 } catch (err) {
                     yield handleError(err)
                 }

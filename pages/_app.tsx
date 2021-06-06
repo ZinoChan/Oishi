@@ -3,7 +3,7 @@ import "@fontsource/pacifico";
 import "@fontsource/poppins";
 import "@fontsource/quicksand/700.css";
 import { wrapper } from "@store/index";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { onAuthSuccess } from "@slices/authSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@lib/firebase";
@@ -12,9 +12,15 @@ import { Toaster } from "react-hot-toast";
 import Loader from "@components/Loader";
 import { PersistGate } from "redux-persist/integration/react";
 import { authLoading } from "@slices/appSlice";
+import { Router } from "next/router";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);
+  const [pageLoading, setPageLoading] = useState(false);
+
+  Router.events.on("routeChangeStart", () => setPageLoading(true));
+  Router.events.on("routeChangeComplete", () => setPageLoading(false));
+  Router.events.on("routeChangeError", () => setPageLoading(false));
 
   const dispatch = useDispatch();
 
@@ -35,8 +41,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <PersistGate persistor={store.__persistor} loading={<Loader />}>
       <>
-        <Component {...pageProps} />
-        <Toaster />
+        {pageLoading && <Loader />}
+        {!pageLoading && (
+          <>
+            <Component {...pageProps} />
+            <Toaster />
+          </>
+        )}
       </>
     </PersistGate>
   );

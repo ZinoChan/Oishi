@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@lib/firebase";
-import Loader from "./Loader";
 import EmptyCart from "./checkout/EmptyCart";
+import AuthLoader from "./auth/AuthLoader";
 
 const WithAuth = ({ children }) => {
   const [user, loading, error] = useAuthState(auth);
@@ -21,7 +21,7 @@ const WithAuth = ({ children }) => {
   return (
     <>
       {loading ? (
-        <Loader />
+        <AuthLoader />
       ) : user ? (
         cart.length > 0 ? (
           children
