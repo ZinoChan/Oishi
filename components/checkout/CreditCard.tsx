@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrders } from "@slices/ordersSlice";
 import { serverTimestamp } from "@lib/firebase";
+import { motion } from "framer-motion";
+import { itemSlideUp, list } from "@helpers/animation";
 
 const CreditCard = () => {
   const router = useRouter();
@@ -61,11 +63,17 @@ const CreditCard = () => {
   };
 
   return (
-    <form
+    <motion.form
+      initial="hidden"
+      animate="visible"
+      variants={list}
       onSubmit={handleSubmit(onSubmit)}
       className="my-6 grid sm:grid-cols-3 grid-cols-1 gap-4"
     >
-      <div className="flex flex-col space-y-2 sm:col-span-3">
+      <motion.div
+        variants={itemSlideUp}
+        className="flex flex-col space-y-2 sm:col-span-3"
+      >
         <label htmlFor="cardNumber" className="font-main text-md">
           Card Number
         </label>
@@ -77,8 +85,8 @@ const CreditCard = () => {
         <span className="text-red-300 text-sm font-main">
           {errors?.cardNumber?.message}
         </span>
-      </div>
-      <div className="flex flex-col space-y-2">
+      </motion.div>
+      <motion.div variants={itemSlideUp} className="flex flex-col space-y-2">
         <label htmlFor="Country" className="font-main text-md">
           Name on Card
         </label>
@@ -90,8 +98,8 @@ const CreditCard = () => {
         <span className="text-red-300 text-sm font-main">
           {errors?.nameOnCard?.message}
         </span>
-      </div>
-      <div className="flex flex-col space-y-2">
+      </motion.div>
+      <motion.div variants={itemSlideUp} className="flex flex-col space-y-2">
         <label htmlFor="Country" className="font-main text-md">
           Cvv Code
         </label>
@@ -103,8 +111,8 @@ const CreditCard = () => {
         <span className="text-red-300 text-sm font-main">
           {errors?.cvvCode?.message}
         </span>
-      </div>
-      <div className="flex flex-col space-y-2">
+      </motion.div>
+      <motion.div variants={itemSlideUp} className="flex flex-col space-y-2">
         <label htmlFor="Adress" className="font-main text-md">
           Expirity Date
         </label>
@@ -156,8 +164,11 @@ const CreditCard = () => {
             </span>
           </div>
         </div>
-      </div>
-      <div className="mt-4 col-span-3 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
+      </motion.div>
+      <motion.div
+        variants={itemSlideUp}
+        className="mt-4 col-span-3 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center "
+      >
         <Link href="/checkout/billing">
           <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
             back to billing
@@ -169,8 +180,8 @@ const CreditCard = () => {
         >
           Confirm
         </button>
-      </div>
-    </form>
+      </motion.div>
+    </motion.form>
   );
 };
 

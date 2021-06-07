@@ -1,10 +1,12 @@
 import Cart from "@components/menu/Cart";
 import MenuItem from "@components/menu/MenuItem";
 import Navbar from "@components/Navbar";
+import { list, slideDown, slideToLeft, slideToRight } from "@helpers/animation";
 import { END } from "@redux-saga/core";
 import { getItems } from "@slices/itemsSlice";
 import { SagaStore, wrapper } from "@store/index";
 import styles from "@styles/Menu.module.css";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 import { useState } from "react";
@@ -15,7 +17,6 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
     store.dispatch(getItems());
     store.dispatch(END);
   }
-
   await (store as SagaStore).sagaTask.toPromise();
 });
 
@@ -43,9 +44,22 @@ const Menu = () => {
       <Cart openCart={openCart} setOpenCart={setOpenCart} />
       <Navbar setOpenCart={setOpenCart} />
       <div className="max-w-screen-xl px-2 mx-auto w-full">
-        <h1 className="font-main text-3xl capitalize mb-10">Main menu</h1>
+        <motion.h1
+          initial="hidden"
+          animate="visible"
+          variants={slideDown}
+          className="font-main text-3xl capitalize mb-10"
+        >
+          Main menu
+        </motion.h1>
         <div className="flex justify-between items-center max-w-screen-md mx-auto mb-10">
-          <div className="flex items-center sm:justify-center sm:space-x-6 justify-between sm:flex-no-wrap  flex-wrap">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={slideToRight}
+            custom={0.9}
+            className="flex items-center sm:justify-center sm:space-x-6 justify-between sm:flex-no-wrap  flex-wrap"
+          >
             {menuIcons.map((icon, index) => (
               <div
                 key={`${icon.name}-${index}`}
@@ -62,14 +76,24 @@ const Menu = () => {
                 </span>
               </div>
             ))}
-          </div>
-          <Link href="/customize">
-            <a className=" focus:outline-none transition-all hover:shadow-btn_lg shadow-btn px-4 py-2 font-bold rounded bg-primary text-white font-main text-sm">
-              Customize order
-            </a>
-          </Link>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={slideToLeft}
+            custom={0.9}
+          >
+            <Link href="/customize">
+              <a className=" focus:outline-none transition-all hover:shadow-btn_lg shadow-btn px-4 py-2 font-bold rounded bg-primary text-white font-main text-sm">
+                Customize order
+              </a>
+            </Link>
+          </motion.div>
         </div>
-        <div
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={list}
           className={`${styles.menu} grid grid-cols-2 md:grid-cols-auto-4 md:gap-8 gap-4   justify-center`}
         >
           {food?.items.length === 0 && <p>No Food Was Found</p>}
@@ -86,7 +110,7 @@ const Menu = () => {
                 price={price}
               />
             ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

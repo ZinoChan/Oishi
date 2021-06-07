@@ -1,5 +1,8 @@
+import { itemSlideUp, list } from "@helpers/animation";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { motion } from "framer-motion";
 import { paypalValidation } from "helpers/yupValidation";
+import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -16,8 +19,17 @@ const Paypal = () => {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="my-6">
-      <div className="flex flex-col space-y-2 col-span-3 mb-4">
+    <motion.form
+      initial="hidden"
+      animate="visible"
+      variants={list}
+      onSubmit={handleSubmit(onSubmit)}
+      className="my-6"
+    >
+      <motion.div
+        variants={itemSlideUp}
+        className="flex flex-col space-y-2 col-span-3 mb-4"
+      >
         <label htmlFor="email" className="font-main text-md">
           Email
         </label>
@@ -29,8 +41,8 @@ const Paypal = () => {
         <span className="text-red-300 text-sm font-main">
           {errors?.email?.message}
         </span>
-      </div>
-      <div className="flex flex-col space-y-2">
+      </motion.div>
+      <motion.div variants={itemSlideUp} className="flex flex-col space-y-2">
         <label htmlFor="password" className="font-main text-md">
           Password
         </label>
@@ -42,19 +54,24 @@ const Paypal = () => {
         <span className="text-red-300 text-sm font-main">
           {errors?.password?.message}
         </span>
-      </div>
-      <div className="mt-4 col-span-3 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
-        <button className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
-          back to billing
-        </button>
+      </motion.div>
+      <motion.div
+        variants={itemSlideUp}
+        className="mt-4 col-span-3 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center "
+      >
+        <Link href="/billing">
+          <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
+            back to billing
+          </a>
+        </Link>
         <button
           type="submit"
           className="font-main text-white bg-primary  border-2 border-primary  px-4 py-1 rounded "
         >
           Confirm
         </button>
-      </div>
-    </form>
+      </motion.div>
+    </motion.form>
   );
 };
 

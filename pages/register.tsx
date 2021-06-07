@@ -17,6 +17,16 @@ import { CustomDialog } from "react-st-modal";
 import AuthError from "@components/auth/AuthError";
 import AuthLoader from "@components/auth/AuthLoader";
 import toast from "react-hot-toast";
+import {
+  itemSlideUp,
+  list,
+  slideDown,
+  slideToLeft,
+  slideToRight,
+  slideUp,
+  zoomIn,
+} from "@helpers/animation";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -72,33 +82,56 @@ const Register = () => {
           className="min-h-screen flex items-center md:py-0 bg-cover bg-center sm:px-0 overflow-x-hidden px-2 py-20"
         >
           <Navbar />
-          <div className=" w-full max-w-md bg-white mx-auto border border-gray-200 p-4">
-            <h2 className=" text-center font-main sm:text-3xl text-2xl font-bold text-primary mb-6 capitalize">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={zoomIn}
+            className=" w-full max-w-md bg-white mx-auto border border-gray-200 p-4"
+          >
+            <motion.h2
+              initial="hidden"
+              animate="visible"
+              variants={slideDown}
+              custom={0.9}
+              className=" text-center font-main sm:text-3xl text-2xl font-bold text-primary mb-6 capitalize"
+            >
               Register
-            </h2>
+            </motion.h2>
             <div className="flex mb-6 justify-between">
-              <button
+              <motion.button
+                initial="hidden"
+                animate="visible"
+                variants={slideToRight}
+                custom={1.2}
                 onClick={() => setRegisterType("signin")}
                 className={`${
                   registerType !== "signin" && "opacity-30"
                 } font-main text-white bg-black  py-1 px-2 text-md rounded`}
               >
                 Sign In
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                initial="hidden"
+                animate="visible"
+                variants={slideToLeft}
+                custom={1.2}
                 onClick={() => setRegisterType("signup")}
                 className={`${
                   registerType !== "signup" && "opacity-30"
                 } font-main text-white bg-black  py-1 px-2 text-md rounded`}
               >
                 Sign Up
-              </button>
+              </motion.button>
             </div>
-            <form
+            <motion.form
               onSubmit={handleSubmit(onSubmit)}
               className="w-full flex flex-col space-y-4 mb-4"
+              initial="hidden"
+              animate="visible"
+              variants={list}
+              custom={1.5}
             >
-              <div>
+              <motion.div variants={itemSlideUp}>
                 <input
                   {...register("email")}
                   type="email"
@@ -108,8 +141,8 @@ const Register = () => {
                 <span className="text-red-300 text-sm font-main my-2">
                   {errors?.email?.message}
                 </span>
-              </div>
-              <div className="relative">
+              </motion.div>
+              <motion.div variants={itemSlideUp} className="relative">
                 <input
                   {...register("password")}
                   type={showPassword ? "text" : "password"}
@@ -126,34 +159,44 @@ const Register = () => {
                   }`}
                   alt="show/hide passowrd"
                 />
-              </div>
+              </motion.div>
               <span className="text-red-300 text-sm my-2 font-main">
                 {errors?.password?.message}
               </span>
-              <p className="font-poppins text-gray-900 text-sm underline">
+              <motion.p
+                variants={itemSlideUp}
+                className="font-poppins text-gray-900 text-sm underline"
+              >
                 Forgot Password ?
-              </p>
-              <button
+              </motion.p>
+              <motion.button
+                variants={itemSlideUp}
                 type="submit"
                 className="font-main text-white bg-primary w-full py-2 rounded"
               >
                 Submit
-              </button>
-            </form>
-            <button
+              </motion.button>
+            </motion.form>
+            <motion.button
+              initial="hidden"
+              animate="visible"
+              variants={slideUp}
+              custom={2}
               onClick={() => dispatch(signInWithGoogle())}
-              type="submit"
               className="font-main text-white bg-blue-300 w-full py-2 rounded mb-4"
             >
               Login With Google
-            </button>
-            <button
-              type="submit"
+            </motion.button>
+            <motion.button
+              initial="hidden"
+              animate="visible"
+              variants={slideUp}
+              custom={2.2}
               className="font-main text-white bg-blue-600 w-full py-2 rounded"
             >
               Login With Facebook
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </section>
       )}
     </>

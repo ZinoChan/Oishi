@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "@slices/profileSlice";
+import { motion } from "framer-motion";
+import { itemSlideUp, list, slideUp } from "@helpers/animation";
 
 const Billing = () => {
   const router = useRouter();
@@ -49,11 +51,17 @@ const Billing = () => {
       <Navigation current="billing" />
       <section className="min-h-screen py-20 flex items-center">
         <div className="max-w-screen-md px-2 w-full mx-auto">
-          <form
+          <motion.form
+            initial="hidden"
+            animate="visible"
+            variants={list}
             onSubmit={handleSubmit(onSubmit)}
             className="my-6 grid md:grid-cols-2 grid-cols-1 gap-4"
           >
-            <div className="flex flex-col space-y-2">
+            <motion.div
+              variants={itemSlideUp}
+              className="flex flex-col space-y-2"
+            >
               <label htmlFor="Full Name" className="font-main text-md">
                 Full Name
               </label>
@@ -66,9 +74,12 @@ const Billing = () => {
               <span className="text-red-300 text-sm font-main">
                 {errors?.fullname?.message}
               </span>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col space-y-2">
+            <motion.div
+              variants={itemSlideUp}
+              className="flex flex-col space-y-2"
+            >
               <label htmlFor="Adress" className="font-main text-md">
                 Address
               </label>
@@ -80,9 +91,12 @@ const Billing = () => {
               <span className="text-red-300 text-sm font-main">
                 {errors?.address?.message}
               </span>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col space-y-2">
+            <motion.div
+              variants={itemSlideUp}
+              className="flex flex-col space-y-2"
+            >
               <label htmlFor="Zip Code" className="font-main text-md">
                 postal code
               </label>
@@ -94,8 +108,11 @@ const Billing = () => {
               <span className="text-red-300 text-sm font-main">
                 {errors?.postalCode?.message}
               </span>
-            </div>
-            <div className="flex flex-col space-y-2">
+            </motion.div>
+            <motion.div
+              variants={itemSlideUp}
+              className="flex flex-col space-y-2"
+            >
               <label htmlFor="mobile" className="font-main text-md">
                 mobile
               </label>
@@ -108,23 +125,26 @@ const Billing = () => {
               <span className="text-red-300 text-sm font-main">
                 {errors?.mobile?.message}
               </span>
-            </div>
+            </motion.div>
 
             <div className=" col-span-2 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
-              <Link href="/checkout/orderDetails">
-                <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
-                  back to details
-                </a>
-              </Link>
+              <motion.div variants={itemSlideUp}>
+                <Link href="/checkout/orderDetails">
+                  <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
+                    back to details
+                  </a>
+                </Link>
+              </motion.div>
 
-              <button
+              <motion.button
+                variants={itemSlideUp}
                 type="submit"
                 className="font-main text-white bg-primary mb-4 border-2 border-primary  px-4 py-1 rounded "
               >
                 Payment details
-              </button>
+              </motion.button>
             </div>
-          </form>
+          </motion.form>
         </div>
       </section>
     </WithAuth>

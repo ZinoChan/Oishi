@@ -15,6 +15,7 @@
     "@reduxjs/toolkit": "^1.5.1",
     "@types/uuid": "^8.3.0",
     "firebase": "^8.6.2",
+    "framer-motion": "^4.1.17",
     "next": "10.2.0",
     "next-redux-wrapper": "^6.0.2",
     "next-transpile-modules": "^7.2.0",

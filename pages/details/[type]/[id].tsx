@@ -9,6 +9,8 @@ import Cart from "@components/menu/Cart";
 import toast from "react-hot-toast";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { firestore } from "@lib/firebase";
+import { motion } from "framer-motion";
+import { itemSlideUp, list, slideToLeft, slideUp } from "@helpers/animation";
 
 const ItemDetails = () => {
   const router = useRouter();
@@ -72,29 +74,59 @@ const ItemDetails = () => {
           <Cart openCart={openCart} setOpenCart={setOpenCart} />
           <div className="xl:max-w-screen-xl  px-2 mx-auto">
             <div className="grid lg:grid-cols-2 lg:grid-rows-2 grid-cols-1  gap-8">
-              <div className="self-center">
-                <h1 className="font-main text-2xl font-bold capitalize mb-2">
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={list}
+                className="self-center"
+              >
+                <motion.h1
+                  variants={itemSlideUp}
+                  className="font-main text-2xl font-bold capitalize mb-2"
+                >
                   {item_details.item_name}
-                </h1>
-                <p className="text-md font-poppins text-gray-500 leading-normal mb-4">
+                </motion.h1>
+                <motion.p
+                  variants={itemSlideUp}
+                  className="text-md font-poppins text-gray-500 leading-normal mb-4"
+                >
                   {item_details.description}
-                </p>
-                <h2 className="font-main text-xl font-bold capitalize">
+                </motion.p>
+                <motion.h2
+                  variants={itemSlideUp}
+                  className="font-main text-xl font-bold capitalize"
+                >
                   Ingredients
-                </h2>
-                <p className="text-md font-poppins text-gray-500 leading-normal mb-4">
+                </motion.h2>
+                <motion.p
+                  variants={itemSlideUp}
+                  className="text-md font-poppins text-gray-500 leading-normal mb-4"
+                >
                   {item_details.ingredients}
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
               <div className="xl:row-span-2 self-center justify-self-center">
-                <Image
-                  src={item_details.item_image}
-                  alt="pizza"
-                  width={400}
-                  height={400}
-                />
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  variants={slideToLeft}
+                  custom={0.9}
+                >
+                  <Image
+                    src={item_details.item_image}
+                    alt="pizza"
+                    width={400}
+                    height={400}
+                  />
+                </motion.div>
                 <div className="flex justify-between items-center mt-6 flex-col sm:flex-row"></div>
-                <div className="flex items-center justify-between mt-4 flex-col sm:flex-row">
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  variants={slideUp}
+                  custom={1.2}
+                  className="flex items-center justify-between mt-4 flex-col sm:flex-row"
+                >
                   <p className="text-md font-main text-xl  text-gray-900 leading-normal ">
                     Price: {item_details.price}$
                   </p>
@@ -105,16 +137,22 @@ const ItemDetails = () => {
                   >
                     {inCart ? "in Cart" : "place order"}
                   </button>
-                </div>
+                </motion.div>
               </div>
-              <div className="xl:col-span-1 lg:col-span-2">
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={slideUp}
+                custom={1.9}
+                className="xl:col-span-1 lg:col-span-2"
+              >
                 <Reviews
                   dispatch={dispatch}
                   auth={auth}
                   reviews={reviews}
                   itemId={id}
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>

@@ -1,4 +1,6 @@
+import { itemSlideUp } from "@helpers/animation";
 import { addItem } from "@slices/cartSlice";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -26,7 +28,10 @@ const MenuItem = ({ cart, id, category, item_image, price, item_name }) => {
   };
 
   return (
-    <div className="border border-gray-200  bg-white rounded-lg p-2 text-center">
+    <motion.div
+      variants={itemSlideUp}
+      className="border border-gray-200  bg-white rounded-lg p-2 text-center"
+    >
       <Link href={`/details/${category}/${id}`}>
         <a>
           <div>
@@ -53,7 +58,7 @@ const MenuItem = ({ cart, id, category, item_image, price, item_name }) => {
           <span>+</span>
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
