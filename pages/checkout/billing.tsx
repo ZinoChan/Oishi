@@ -56,7 +56,7 @@ const Billing = () => {
             animate="visible"
             variants={list}
             onSubmit={handleSubmit(onSubmit)}
-            className="my-6 grid md:grid-cols-2 grid-cols-1 gap-4"
+            className="my-6  md:grid md:grid-cols-2 gap-4"
           >
             <motion.div
               variants={itemSlideUp}
@@ -111,7 +111,7 @@ const Billing = () => {
             </motion.div>
             <motion.div
               variants={itemSlideUp}
-              className="flex flex-col space-y-2"
+              className="flex flex-col space-y-2 mb-4"
             >
               <label htmlFor="mobile" className="font-main text-md">
                 mobile
@@ -127,7 +127,7 @@ const Billing = () => {
               </span>
             </motion.div>
 
-            <div className=" col-span-2 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center ">
+            <div className=" col-span-2 flex items-center sm:justify-between flex-wrap sm:space-y-0 space-y-4 sm:space-x-0 space-x-2 justify-center ">
               <motion.div variants={itemSlideUp}>
                 <Link href="/checkout/orderDetails">
                   <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">

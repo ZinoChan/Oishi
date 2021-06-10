@@ -3,3 +3,10 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+
+@media (max-width: 720px){
+  .cart {
+    filter: brightness(0) invert(1)
+  }
+}

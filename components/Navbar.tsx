@@ -1,6 +1,9 @@
 import { signInWithGoogle, signOut } from "@slices/authSlice";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
+import styles from "@styles/Menu.module.css";
+import { useState } from "react";
+import { Divide as Hamburger } from "hamburger-react";
 
 const Navbar = ({ setOpenCart = null }) => {
   const { cartLength, userExists, authLoading } = useSelector(
@@ -11,6 +14,8 @@ const Navbar = ({ setOpenCart = null }) => {
     })
   );
 
+  const [navOpen, setNavOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   return (
@@ -19,7 +24,19 @@ const Navbar = ({ setOpenCart = null }) => {
         <div className="w-24 h-auto">
           <img src="/images/logo.png" alt="Logo" />
         </div>
-        <ul className="flex items-center space-x-4">
+        <ul
+          className={`
+          flex md:flex-row items-center md:space-x-4
+          md:h-auto md:text-black md:static md:bg-transparent
+          md:space-y-0  md:justify-end
+          h-screen z-40 w-full bg-primary 
+          text-white fixed top-0 left-0 right-0 flex-col 
+          transition-all duration-300
+          justify-center space-y-6 transform ${
+            navOpen ? "scale-100" : "scale-0"
+          }
+          `}
+        >
           <li className="font-main font-bold text-xl">
             <Link href="/">
               <a>Home</a>
@@ -37,7 +54,7 @@ const Navbar = ({ setOpenCart = null }) => {
             >
               <img
                 src="/images/icons/cart.svg"
-                className="w-8 h-auto"
+                className={`${styles.cart} w-8 h-auto`}
                 alt="cart"
               />
 
@@ -49,19 +66,26 @@ const Navbar = ({ setOpenCart = null }) => {
           {!authLoading && userExists && (
             <button
               onClick={() => dispatch(signOut())}
-              className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase"
+              className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border md:border-primary md:text-primary font-main uppercase"
             >
               log out
             </button>
           )}
           {!authLoading && !userExists && (
             <Link href="/register">
-              <a className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border border-primary text-primary font-main uppercase">
+              <a className="transition-all hover:shadow-btn px-4 py-1 font-bold rounded border md:border-primary md:text-primary font-main uppercase">
                 Log in
               </a>
             </Link>
           )}
         </ul>
+        <div className="md:hidden z-40">
+          <Hamburger
+            toggled={navOpen}
+            toggle={() => setNavOpen(!navOpen)}
+            color={`${navOpen ? "#fff" : "#FF4445"}`}
+          />
+        </div>
       </nav>
     </header>
   );

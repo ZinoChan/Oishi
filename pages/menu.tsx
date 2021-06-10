@@ -52,7 +52,7 @@ const Menu = () => {
         >
           Main menu
         </motion.h1>
-        <div className="flex justify-between items-center max-w-screen-md mx-auto mb-10">
+        <div className="flex justify-between items-center md:space-y-0 space-y-4 md:flex-row flex-col max-w-screen-md mx-auto mb-10">
           <motion.div
             initial="hidden"
             animate="visible"

@@ -13,10 +13,10 @@ const Cart = ({ openCart, setOpenCart }) => {
   return (
     <div
       className={`${
-        openCart ? "right-0" : "-right-full"
-      }  transition-all  fixed duration-500 z-30 top-0 bottom-0 overflow-y-scroll w-96 max-w-100 bg-secondary py-16  px-10`}
+        openCart ? "translate-x-0" : "translate-x-full"
+      }  transition-all  fixed duration-500 z-50 top-0 right-0 bottom-0 overflow-y-scroll w-96 max-w-full bg-secondary px-1 py-12 md:py-16 transform md:px-10`}
     >
-      <div className="absolute top-4 left-4">
+      <div className="absolute top-2 left-2">
         <span
           className="hover:text-primary cursor-pointer text-2xl font-bold"
           onClick={() => setOpenCart(false)}
