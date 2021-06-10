@@ -7,7 +7,7 @@ const hydrate = createAction(HYDRATE);
 
 
 interface Items {
-    id: number;
+    id: string;
     item_name: string;
     item_image: string;
     category: string;

@@ -64,7 +64,10 @@ const Menu = () => {
               <div
                 key={`${icon.name}-${index}`}
                 onClick={() => setCurrentFood(icon.name)}
-                className="rounded-xl border border-gray-200 text-center w-16 p-1 hover:border-primary cursor-pointer"
+                className={`
+                ${current_food === icon.name && "border-primary"}
+                rounded-xl border border-gray-200 
+                text-center w-16 p-1 hover:border-primary cursor-pointer`}
               >
                 <img
                   src={icon.src}
@@ -96,7 +99,7 @@ const Menu = () => {
           variants={list}
           className={`${styles.menu} grid grid-cols-2 md:grid-cols-auto-4 md:gap-8 gap-4   justify-center`}
         >
-          {food?.items.length === 0 && <p>No Food Was Found</p>}
+          {food?.items.length === 0 && <p>Food Not Available Yet</p>}
 
           {food?.items &&
             food?.items?.map(({ id, item_name, item_image, price }) => (

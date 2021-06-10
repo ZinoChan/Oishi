@@ -1,12 +1,28 @@
 import { itemSlideUp } from "@helpers/animation";
-import { addItem } from "@slices/cartSlice";
+import { addItem, CartItem } from "@slices/cartSlice";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
-const MenuItem = ({ cart, id, category, item_image, price, item_name }) => {
+interface MenuItems {
+  id: string;
+  item_name: string;
+  item_image: string;
+  category: string;
+  price: number;
+  cart: CartItem[];
+}
+
+const MenuItem = ({
+  cart,
+  id,
+  category,
+  item_image,
+  price,
+  item_name,
+}: MenuItems) => {
   const inCart = cart.some((item) => item.id === id);
 
   const dispatch = useDispatch();

@@ -2,7 +2,15 @@ import { addQty, minusQty, removeItem } from "@slices/cartSlice";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({ id, item_name, item_image, price, quantity }) => {
+interface CartItem {
+  id: string;
+  item_name: string;
+  item_image: string;
+  price: number;
+  quantity: number;
+}
+
+const CartItem = ({ id, item_name, item_image, price, quantity }: CartItem) => {
   const dispatch = useDispatch();
 
   return (

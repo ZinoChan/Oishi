@@ -27,7 +27,7 @@ const ItemDetails = () => {
 
   const item_details = items
     ?.find((item) => item.type === type)
-    ?.items?.find((item) => item.id === Number(id));
+    ?.items?.find((item) => item.id === id);
 
   const inCart = cart.some((item) => item.id === item_details?.id);
 

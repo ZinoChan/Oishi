@@ -32,7 +32,7 @@ const Navbar = ({ setOpenCart = null }) => {
           h-screen z-40 w-full bg-primary 
           text-white fixed top-0 left-0 right-0 flex-col 
           transition-all duration-300
-          justify-center space-y-6 transform ${
+          justify-center space-y-6 transform md:scale-100 ${
             navOpen ? "scale-100" : "scale-0"
           }
           `}

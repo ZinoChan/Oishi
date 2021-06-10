@@ -4,9 +4,8 @@
   }
 }
 
-
-@media (max-width: 720px){
+@media (max-width: 768px) {
   .cart {
-    filter: brightness(0) invert(1)
+    filter: brightness(0) invert(1);
   }
 }

@@ -4,7 +4,7 @@ export const items_data = [
         type: "pizza",
         items: [
             {
-                id: 1,
+                id: '4XEXkKOiB6OOiaYoHxPZ',
                 item_name: "Margherita",
                 item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/p7.png?alt=media&token=7819726d-a666-448a-877f-2f35bdc18942",
                 category: "pizza",
@@ -14,7 +14,7 @@ export const items_data = [
                 
             },
             {
-                id: 12,
+                id: '4XEXkKOmPoCdiaYoHxPZ',
                 item_name: "Neopolitan",
                 item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/p2.png?alt=media&token=b83a43fc-b722-4746-a137-4d308452f379",
                 category: "pizza",
@@ -24,7 +24,7 @@ export const items_data = [
                 
             },
             {
-                id: 3,
+                id: '4XEXkKOiB4CdiaYoHvKz',
                 item_name: "Chicago",
                 item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/p4.png?alt=media&token=41df67c7-f665-47c6-97a7-a61ff0b4b7a7",
                 category: "pizza",
@@ -34,7 +34,7 @@ export const items_data = [
                
             },
             {
-                id: 6,
+                id: '16EXkKOiB4CdiaYoHxPZ',
                 item_name: "New york-style",
                 item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/p-6.png?alt=media&token=dbf9aa91-3a17-45ea-aa6c-105d4319f93f",
                 category: "pizza",
@@ -44,7 +44,7 @@ export const items_data = [
                
             },
             {
-                id: 7,
+                id: '4XEXJu1iB4CdiaYoHxPZ',
                 item_name: "Sicilian",
                 item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/p1.png?alt=media&token=2f50e51a-1f97-4ceb-a0e9-ed0145835d04",
                 category: "pizza",
@@ -54,7 +54,7 @@ export const items_data = [
                
             },
             {
-                id: 8,
+                id: '4XEXkKOiB4CdiaYoHbnO',
                 item_name: "Greek",
                 item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/p8.png?alt=media&token=40ffec29-5f4c-4a1f-a4db-d766b084abee",
                 category: "pizza",
@@ -64,7 +64,7 @@ export const items_data = [
                
             },
             {
-                id: 9,
+                id: '4XLpkKOiB4CdiaYoHxPZ',
                 item_name: "detroit",
                 item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/p3.png?alt=media&token=e9ad61ed-d34a-4d38-bb67-be4ec8c21fe1",
                 category: "pizza",
@@ -74,7 +74,7 @@ export const items_data = [
                
             },
             {
-                id: 10,
+                id: 'Lpo5kKOiB4CdiaYoHxPZ',
                 item_name: "louin",
                 item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/p5.png?alt=media&token=733ec906-bf8b-44ab-b8a1-e4a8249307f4",
                 category: "pizza",
@@ -88,7 +88,78 @@ export const items_data = [
     {
       
         type: "burger",
-        items: []
+        items: [
+            {
+                id: '4XEXkUviB4CdiaYzHxPZ',
+                item_name: "Salmon Burger",
+                item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/b1.png?alt=media&token=772bbd70-55bf-45d6-aa20-2e02bb434caa",
+                category: "burger",
+                description: "Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
+                ingredients: "salamon / onions / tomato / cheese / letus",
+                price: 9.00,
+              
+            },
+            {
+                id: '4XEXkKOiB4CdiaYzHxPZ',
+                item_name: "Steak Burger",
+                item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/b2.png?alt=media&token=f4ac1c58-425a-4a4b-ab96-440e34172db3",
+                category: "burger",
+                description: "Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
+                ingredients: "beaf / onions / tomato / cheese / letus",
+                price: 10.00,
+              
+            },
+            {
+                id: '4XEXkKOiB4CdiaYoHxPZ',
+                item_name: "bean Burger",
+                item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/b5.png?alt=media&token=f6e6a650-0f92-4949-b842-1132121e4f45",
+                category: "burger",
+                description: "Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
+                ingredients: "beans / onions / tomato / cheese / letus",
+                price: 5.00,
+              
+            },
+            {
+                id: '6XEXkKOiB4CdiaYoHxMH',
+                item_name: "Chicken Burger",
+                item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/b4.png?alt=media&token=241475d0-1bb4-4807-88bd-dad14c37108f",
+                category: "burger",
+                description: "Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
+                ingredients: "chiken / onions / tomato / cheese / letus",
+                price: 5.00,
+              
+            },
+            {
+                id: '7jUhkKOiB4CdiaYoHxMH',
+                item_name: "Beef Burger",
+                item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/b3.png?alt=media&token=d26116a5-3351-44c2-a94f-ead56533aacf",
+                category: "burger",
+                description: "Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
+                ingredients: "Beef / onions / tomato / cheese / letus",
+                price: 13.00,
+              
+            },
+            {
+                id: '7jUhkKOlJ9CdipLoHxMH',
+                item_name: "Turkey Burger",
+                item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/b7.png?alt=media&token=78edb6c8-d580-492e-b572-65506eceb547",
+                category: "burger",
+                description: "Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
+                ingredients: "Turkey / onions / tomato / cheese / letus",
+                price: 11.00,
+              
+            },
+            {
+                id: '7jUhkKOlJ9CgoPLoHxMH',
+                item_name: "Veggies Burger",
+                item_image: "https://firebasestorage.googleapis.com/v0/b/pizza-16763.appspot.com/o/b8.png?alt=media&token=44d0f5fd-18fc-47df-9ea3-1d9a13e0c7d1",
+                category: "burger",
+                description: "Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
+                ingredients: "mushrom / onions / tomato / cheese / letus",
+                price: 11.00,
+              
+            }
+        ]
     },
     {
         
