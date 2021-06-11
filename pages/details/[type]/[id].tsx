@@ -11,6 +11,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { firestore } from "@lib/firebase";
 import { motion } from "framer-motion";
 import { itemSlideUp, list, slideToLeft, slideUp } from "@helpers/animation";
+import NotFound from "pages/404";
 
 const ItemDetails = () => {
   const router = useRouter();
@@ -68,6 +69,7 @@ const ItemDetails = () => {
 
   return (
     <>
+      {!item_details && <NotFound />}
       {item_details && (
         <section className="min-h-screen flex items-center py-20 bg-light_gray">
           <Navbar setOpenCart={setOpenCart} />

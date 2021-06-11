@@ -39,17 +39,20 @@ function MyApp({ Component, pageProps }) {
   const store = useStore();
 
   return (
-    <PersistGate persistor={store.__persistor} loading={<Loader />}>
-      <>
-        {pageLoading && <Loader />}
-        {!pageLoading && (
-          <>
-            <Component {...pageProps} />
-            <Toaster />
-          </>
-        )}
-      </>
-    </PersistGate>
+    <>
+      {/*// @ts-ignore */}
+      <PersistGate persistor={store.__persistor} loading={<Loader />}>
+        <>
+          {pageLoading && <Loader />}
+          {!pageLoading && (
+            <>
+              <Component {...pageProps} />
+              <Toaster />
+            </>
+          )}
+        </>
+      </PersistGate>
+    </>
   );
 }
 

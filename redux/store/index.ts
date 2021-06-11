@@ -69,10 +69,11 @@ export const makeStore = (context: Context = null) => {
         whitelist: ['items', 'cart'], 
         storage
     };
+    
 
     const persistedReducer = persistReducer(persistConfig, rootReducer)
     const store = makeConfiguredStore(persistedReducer);
-
+    {/*// @ts-ignore */}
     store.__persistor = persistStore(store);
 
     return store;
