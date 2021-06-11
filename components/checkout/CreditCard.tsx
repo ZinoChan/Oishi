@@ -3,7 +3,7 @@ import { cardValidation } from "helpers/yupValidation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { CustomDialog } from "react-st-modal";
+// import { CustomDialog, useDialog } from "react-st-modal";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrders } from "@slices/ordersSlice";
@@ -20,6 +20,8 @@ const CreditCard = () => {
   }));
   const dispatch = useDispatch();
 
+  // const dialog = useDialog();
+
   const {
     register,
     handleSubmit,
@@ -33,33 +35,37 @@ const CreditCard = () => {
     dispatch(
       setOrders({ id: uid, orders: { cart, orderAt: serverTimestamp() } })
     );
-    CustomDialog(
-      <div className="p-4 text-center">
-        <h2 className="text-primary text-xl font-bold font-main">
-          Payment confirmed successuflly
-        </h2>
-        <div className="flex justify-between">
-          <button
-            onClick={() => router.push("/menu")}
-            className="font-main text-white bg-primary  border-primary  px-4 py-1 rounded "
-          >
-            menu
-          </button>
-          <button
-            onClick={() => router.push("/")}
-            className="font-main text-white bg-primary  border-primary  px-4 py-1 rounded "
-          >
-            Orders
-          </button>
-        </div>
-      </div>,
-      {
-        title: "Done",
-        showCloseIcon: true,
-      }
-    );
+    // CustomDialog(
+    //   <div className="p-4 text-center">
+    //     <h2 className="text-primary text-xl font-bold font-main">
+    //       Payment confirmed successuflly
+    //     </h2>
+    //     <div className="text-center">
+    //       <button
+    //         onClick={() => {
+    //           router.push("/menu");
 
-    // router.push("/menu");
+    //         }}
+    //         className="font-main text-white bg-primary  border-primary  px-4 py-1 rounded "
+    //       >
+    //         menu
+    //       </button>
+    //       <button
+    //         onClick={() => router.push("/")}
+    //         className="font-main text-white bg-primary  border-primary  px-4 py-1 rounded "
+    //       >
+    //         Orders
+    //       </button>
+    //     </div>
+    //   </div>,
+    //   {
+    //     title: "Done",
+    //     showCloseIcon: false,
+    //     isCanClose: false,
+    //   }
+    // );
+
+    router.push("/menu");
   };
 
   return (
@@ -68,7 +74,7 @@ const CreditCard = () => {
       animate="visible"
       variants={list}
       onSubmit={handleSubmit(onSubmit)}
-      className="my-6 grid sm:grid-cols-3 grid-cols-1 gap-4"
+      className="my-6 sm:grid sm:grid-cols-3 grid-cols-1 gap-4"
     >
       <motion.div
         variants={itemSlideUp}
@@ -167,16 +173,16 @@ const CreditCard = () => {
       </motion.div>
       <motion.div
         variants={itemSlideUp}
-        className="mt-4 col-span-3 flex items-center sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center "
+        className="mt-4 col-span-3 flex items-center   sm:justify-between flex-wrap sm:space-x-0 space-x-2 justify-center "
       >
         <Link href="/checkout/billing">
-          <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
+          <a className="font-main border-2 border-primary text-primary mb-4  px-4 py-1 rounded ">
             back to billing
           </a>
         </Link>
         <button
           type="submit"
-          className="font-main text-white bg-primary  border-2 border-primary  px-4 py-1 rounded "
+          className="font-main text-white bg-primary  border-2 border-primary mb-4  px-4 py-1 rounded "
         >
           Confirm
         </button>

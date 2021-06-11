@@ -18,21 +18,23 @@ const Payment = () => {
       <Navigation current="payment" />
       <section className="min-h-screen sm:py-0 py-20 flex items-center">
         <div className="max-w-screen-md px-2 w-full mx-auto">
-          <div className="flex justify-between items-center flex-wrap">
+          <div className="flex sm:justify-between  justify-center space-x-2 sm:space-x-0 items-center flex-wrap">
             {paymentMethods.map((method, index) => (
               <div
                 key={`${method.name}-${index}`}
                 onClick={() => setPaymentMethod(method.name)}
                 className={`${
                   method.name === paymentMethod && "text-white bg-primary"
-                } cursor-pointer rounded border-2 w-32 h-auto border-primary p-2 flex flex-col items-center space-y-2`}
+                } cursor-pointer rounded border-2 mb-2 w-28 h-auto border-primary p-2 flex flex-col items-center space-y-2`}
               >
                 <img
                   src={method.icon}
                   className="w-10 h-10"
                   alt={method.name}
                 />
-                <p className="font-poppins capitalize ">{method.name}</p>
+                <p className="font-poppins text-sm capitalize ">
+                  {method.name}
+                </p>
               </div>
             ))}
           </div>

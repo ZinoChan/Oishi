@@ -25,19 +25,15 @@ const OrderDetails = () => {
               />
             ))}
           </div>
-          <div className="flex items-center sm:justify-between flex-wrap sm:space-y-0 justify-center space-y-4">
+          <div className="flex items-center sm:justify-between flex-wrap sm:space-y-0 justify-center sm:space-x-2">
             <Link href="/menu">
-              <a>
-                <button className="font-main border-2 border-primary text-primary  px-4 py-1 rounded ">
-                  back to menu
-                </button>
+              <a className="font-main border-2 mb-2 border-primary text-primary  px-4 py-1 rounded ">
+                back to menu
               </a>
             </Link>
             <Link href="/checkout/billing">
-              <a>
-                <button className="font-main text-white bg-primary  px-4 py-1 rounded ">
-                  Billing details
-                </button>
+              <a className="font-main text-white bg-primary mb-2 border-2 border-primary px-4 py-1 rounded ">
+                Billing details
               </a>
             </Link>
           </div>

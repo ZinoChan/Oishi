@@ -26,7 +26,7 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={slideUp}
-              custom={0.3}
+              custom={1.2}
               className="font-poppins leading-normal text-md text-gray-500"
             >
               Lorem ipsum, or lipsum as it is sometimes known, is dummy text
@@ -38,7 +38,7 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={zoomIn}
-              custom={0.4}
+              custom={1.4}
             >
               <img src="/images/burger.png" className="mx-auto" alt="burger" />
             </motion.div>
@@ -46,7 +46,7 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={fadeIn}
-              custom={0.9}
+              custom={1.6}
               className={`${styles.text_stroke} font-pacifico sm:text-9xl text-7xl text-secondary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
             >
               Tasty
@@ -79,7 +79,7 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={slideUp}
-              custom={0.3}
+              custom={1.3}
               className="font-poppins leading-normal text-md text-gray-500"
             >
               Lorem ipsum, or lipsum as it is sometimes known, is dummy text

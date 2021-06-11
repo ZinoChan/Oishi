@@ -75,12 +75,12 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
       <div>
         {reviews?.length > 0 &&
           reviews.map(({ id, user_name, content, user_id, item_id }) => (
-            <div className="flex justify-between mb-2" key={id}>
-              <div>
-                <h4 className="font-main font-bold text-lg mb-1">
+            <div className="flex justify-between space-x-6 mb-2" key={id}>
+              <div className=" overflow-hidden">
+                <h4 className=" font-main font-bold text-lg mb-1">
                   {user_name}
                 </h4>
-                <p className="font-poppins text-md">{content}</p>
+                <span className=" font-poppins text-md ">{content}</span>
               </div>
               {auth?.id === user_id && (
                 <div className="flex flex-col justify-between">
@@ -91,14 +91,14 @@ const Reviews = ({ dispatch, auth, reviews, itemId }) => {
                     className="focus:outline-none mb-2"
                   >
                     <img
-                      className="w-4 h-4"
+                      className="w-6 h-4"
                       src="/images/icons/trash.svg"
                       alt="delete"
                     />
                   </button>
                   <button className="focus:outline-none" onClick={onEditReview}>
                     <img
-                      className="w-4 h-4"
+                      className="w-6 h-4"
                       src="/images/icons/pen.svg"
                       alt="delete"
                     />

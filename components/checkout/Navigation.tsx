@@ -3,7 +3,7 @@ import React from "react";
 
 const Navigation = ({ current }) => {
   return (
-    <div className=" w-full bg-gray-100 py-4 flex items-center justify-center flex-wrap sm:space-y-0 space-y-4 md:space-x-12">
+    <div className=" w-full bg-gray-100 py-4 flex items-center sm:justify-center flex-col sm:flex-row sm:space-y-0 space-y-2  md:space-x-12">
       <div className="flex items-center space-x-2">
         <div
           className={`${

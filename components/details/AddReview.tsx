@@ -6,7 +6,11 @@ import { useDialog } from "react-st-modal";
 const AddReview = ({ dispatch, auth, itemId }) => {
   const dialog = useDialog();
 
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = ({ review }) => {
     const id = generateId();
@@ -21,6 +25,7 @@ const AddReview = ({ dispatch, auth, itemId }) => {
     };
 
     dispatch(addReview({ uid: auth.id, review: user_review, item_id: itemId }));
+    dialog.close();
   };
 
   return (
@@ -31,15 +36,28 @@ const AddReview = ({ dispatch, auth, itemId }) => {
       >
         <input
           type="text"
-          {...register("review")}
+          {...register("review", {
+            required: {
+              value: true,
+              message: "this field is required",
+            },
+            maxLength: {
+              value: 130,
+              message: "Your review can't be more then 130 characters",
+            },
+            minLength: {
+              value: 5,
+              message: "Your review can't be less than 5 characters",
+            },
+          })}
           className="p-2 bg-gray-50 border border-t-0 border-r-0 border-l-0  text-gray-700 text-md font-poppins"
         />
+        <span className="text-red-300 text-sm font-main">
+          {errors?.review?.message}
+        </span>
         <button
           className="bg-primary text-white px-4 py-2 self-center rounded"
           type="submit"
-          onClick={() => {
-            dialog.close();
-          }}
         >
           Submit
         </button>

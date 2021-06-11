@@ -127,10 +127,10 @@ const Billing = () => {
               </span>
             </motion.div>
 
-            <div className=" col-span-2 flex items-center sm:justify-between flex-wrap sm:space-y-0 space-y-4 sm:space-x-0 space-x-2 justify-center ">
-              <motion.div variants={itemSlideUp}>
+            <div className=" col-span-2 flex items-center sm:justify-between flex-wrap  sm:space-x-0 space-x-2 justify-center ">
+              <motion.div variants={itemSlideUp} className="mb-4">
                 <Link href="/checkout/orderDetails">
-                  <a className="font-main border-2 border-primary text-primary sm:mb-0 mb-4 px-4 py-1 rounded ">
+                  <a className="font-main border-2 border-primary text-primary sm:mb-0  px-4 py-1 rounded ">
                     back to details
                   </a>
                 </Link>
@@ -139,7 +139,7 @@ const Billing = () => {
               <motion.button
                 variants={itemSlideUp}
                 type="submit"
-                className="font-main text-white bg-primary mb-4 border-2 border-primary  px-4 py-1 rounded "
+                className="font-main text-white bg-primary mb-4 border border-primary  px-4 py-1 rounded "
               >
                 Payment details
               </motion.button>

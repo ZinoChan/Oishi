@@ -6,13 +6,15 @@ import { clearCustomize } from "@slices/customizeSlice";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Confirm, useDialog } from "react-st-modal";
-import { makeNew } from "../data/data";
+import { customizeOrder } from "../data/data";
 
 const Customize = () => {
   const [openCart, setOpenCart] = useState(false);
   const [currentFoodType, setCurrentFoodType] = useState("pizza");
   const [currentIngredient, setCurrentIngredient] = useState("veggies");
-  const current_food = makeNew.find((types) => types.type === currentFoodType);
+  const current_food = customizeOrder.find(
+    (types) => types.type === currentFoodType
+  );
   const ingredient_type = current_food?.ingredients.find(
     (item) => item.ingredient_name === currentIngredient
   );
@@ -63,7 +65,7 @@ const Customize = () => {
           ))}
         </div>
         <div className="max-w-screen-md w-full mx-auto sm:p-6 p-2 bg-white border border-gray-200">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-6  flex-wrap ">
             {!current_food && (
               <h2 className="font-poppins font-bold text-center my-4 text-lg">
                 Food type Not Found Please try another
