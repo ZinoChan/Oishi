@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 import createSagaMiddleware, { Task } from 'redux-saga';
 import rootSaga from '@sagas/rootSaga';
 import { Context, createWrapper } from 'next-redux-wrapper';
@@ -47,7 +47,7 @@ const makeConfiguredStore = (reducer) => {
         middleware: (getDefaultMiddleware) => 
             getDefaultMiddleware({thunk: false, serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, setOrders.type, onAuthSuccess.type, signOutSuccess.type, addReview.type]
-            }}).concat(logger, sagaMiddleware)
+            }}).concat( sagaMiddleware)
     });
 
     (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);

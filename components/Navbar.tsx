@@ -22,7 +22,11 @@ const Navbar = ({ setOpenCart = null }) => {
     <header className="absolute top-0 w-full py-4">
       <nav className="flex max-w-screen-xl px-2 items-center mx-auto justify-between">
         <div className="w-24 h-auto">
-          <img src="/images/logo.png" alt="Logo" />
+          <Link href="/">
+            <a>
+              <img src="/images/logo.png" alt="Logo" />
+            </a>
+          </Link>
         </div>
         <ul
           className={`
